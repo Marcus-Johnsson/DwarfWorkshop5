@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DwarfWorkshop5.View.Signin"
+             Title="Signin">
+    <VerticalStackLayout>
+        <StackLayout
+          x:Name="LoginInputs"
+          VerticalOptions="Center" 
+          HorizontalOptions="Center"
+          Padding="50"
+          BackgroundColor="Transparent"
+          Spacing="20"  
+          Margin="0, 50, 0, 0">
+
+            <Entry x:Name="SignInUsername" Placeholder="Username"></Entry>
+            <Entry x:Name="SignInPassword" Placeholder="Password" IsPassword="True"></Entry>
+            <Button Text="LogIn"
+                Clicked="OnLoginClicked"
+                BackgroundColor="Transparent"
+                TextColor="Gold"
+                BorderColor="Gold"
+                BorderWidth="1">
+            </Button>
+
+            <Button Text="Cancel"
+                Clicked="OnCancelButtonClicked"
+                BackgroundColor="Transparent"
+                TextColor="Gold"
+                BorderColor="Gold"
+                BorderWidth="1">
+            </Button>
+
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

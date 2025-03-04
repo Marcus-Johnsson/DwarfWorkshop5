@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DwarfWorkshop5.View.register"
+             Title="register">
+    <VerticalStackLayout>
+       
+            <StackLayout
+ 
+             VerticalOptions="Center" 
+             HorizontalOptions="Center"
+             Padding="50"
+             BackgroundColor="Transparent"
+             Spacing="20"  
+             Margin="0, 50, 0, 0">
+
+                <Entry x:Name="UsernameEntry" Placeholder="Username" TextChanged="OnUserNameTextChanged"></Entry>
+
+                <Label x:Name="AvailableLabelUsername" Text="" TextColor="Red"></Label>
+
+
+                <Entry x:Name="PasswordEntryFirst" Placeholder="Password" IsPassword="True" TextChanged="OnPasswordTextChanged"></Entry>
+              
+
+                <Label x:Name="AvailableLabelPassword" Text="" TextColor="Red"></Label>
+
+                <Entry x:Name="PasswordEntrySecound" Placeholder="ReWrite Password" IsPassword="True" TextChanged="OnPasswordTextChanged"></Entry>
+
+                <Button x:Name="CreateAccount"
+                        Text="Create Account"
+                        Clicked="OnCreateAccountClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="Gold"
+                        BorderColor="Gold"
+                        BorderWidth="1">
+
+
+                </Button>
+
+                <Button x:Name="Cancel"
+                        Text="Cancel"
+                        Clicked="OnCancelClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="Gold"
+                        BorderColor="Gold"
+                        BorderWidth="1">
+                </Button>
+
+            </StackLayout>
+     
+    </VerticalStackLayout>
+</ContentPage>
