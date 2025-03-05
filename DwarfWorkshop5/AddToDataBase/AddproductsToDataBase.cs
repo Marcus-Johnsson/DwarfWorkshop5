@@ -8,6 +8,8 @@ namespace DwarfWorkshop5.AddToDataBase
         //also available every where i go
 
         // CategoryId ore = 1 | bar = 2 | gem = 3 | finished product = 4 |
+
+        // Finished product Time Effencie | Ring 10% |
         public static void AddThingsToDataBase()
         {
             using (var mydb = new MyDbContext())
@@ -141,7 +143,430 @@ namespace DwarfWorkshop5.AddToDataBase
                         TimeEfficiency = 2,
                         Price = 100000
                     },
-
+                    new Products
+                    {
+                        Name = "Iron Ring",
+                        CategoryId = 4,
+                        LvlRequirement = 1,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Iron Chain",
+                        CategoryId = 4,
+                        LvlRequirement = 1,
+                        TimeEfficiency = 1.1,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Iron Necklace",
+                        CategoryId = 4,
+                        LvlRequirement = 2,
+                        TimeEfficiency = 1.15,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Copper Ring",
+                        CategoryId = 4,
+                        LvlRequirement = 2,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Copper Chain",
+                        CategoryId = 4,
+                        LvlRequirement = 2,
+                        TimeEfficiency = 1.1,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Iron EarPiece",
+                        CategoryId = 4,
+                        LvlRequirement = 3,
+                        TimeEfficiency = 1.17,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Iron Bracelet",
+                        CategoryId = 4,
+                        LvlRequirement = 3,
+                        TimeEfficiency = 1.12,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Copper Bracelet",
+                        CategoryId = 4,
+                        LvlRequirement = 3,
+                        TimeEfficiency = 1.12,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Iron Ring with Aquamarine",
+                        CategoryId = 4,
+                        LvlRequirement = 4,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Copper Ring with Aquamarine",
+                        CategoryId = 4,
+                        LvlRequirement = 4,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Copper Necklace",
+                        CategoryId = 4,
+                        LvlRequirement = 4,
+                        TimeEfficiency = 1.15,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Cobalt Chain",
+                        CategoryId = 4,
+                        LvlRequirement = 5,
+                        TimeEfficiency = 1.10,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Cobalt Ring",
+                        CategoryId = 4,
+                        LvlRequirement = 5,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Copper Earpiece",
+                        CategoryId = 4,
+                        LvlRequirement = 5,
+                        TimeEfficiency = 1.17,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Copper Bracelet With Emerald",
+                        CategoryId = 4,
+                        LvlRequirement = 6,
+                        TimeEfficiency = 1.12,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Cobalt Ring With Aquamarine",
+                        CategoryId = 4,
+                        LvlRequirement = 6,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Cobalt Bracelet",
+                        CategoryId = 4,
+                        LvlRequirement = 6,
+                        TimeEfficiency = 1.12,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Silver Chain",
+                        CategoryId = 4,
+                        LvlRequirement = 7,
+                        TimeEfficiency = 1.10,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Silver Ring",
+                        CategoryId = 4,
+                        LvlRequirement = 7,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Copper Earpiece With Emerald",
+                        CategoryId = 4,
+                        LvlRequirement = 7,
+                        TimeEfficiency = 1.17,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Silver Bracelet With Aquamarine",
+                        CategoryId = 4,
+                        LvlRequirement = 8,
+                        TimeEfficiency = 1.12,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Cobalt Earpiece With Ruby",
+                        CategoryId = 4,
+                        LvlRequirement = 8,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Silver Bracelet",
+                        CategoryId = 4,
+                        LvlRequirement = 9,
+                        TimeEfficiency = 1.12,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Cobalt Necklace With Ruby",
+                        CategoryId = 4,
+                        LvlRequirement = 9,
+                        TimeEfficiency = 1.15,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Silver Earpiece With Ruby",
+                        CategoryId = 4,
+                        LvlRequirement = 10,
+                        TimeEfficiency = 1.17,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Silver Earpiece With Emerald",
+                        CategoryId = 4,
+                        LvlRequirement = 10,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Copper Braclet With Tsavorite",
+                        CategoryId = 4,
+                        LvlRequirement = 10,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Cobalt Ring With Tsavorite",
+                        CategoryId = 4,
+                        LvlRequirement = 10,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Iron Elephant With Emeralds",
+                        CategoryId = 4,
+                        LvlRequirement = 11,
+                        TimeEfficiency = 1.50,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Cobalt Earpiece With Aquamarine",
+                        CategoryId = 4,
+                        LvlRequirement = 11,
+                        TimeEfficiency = 1.17,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Silver Necklace With Ruby",
+                        CategoryId = 4,
+                        LvlRequirement = 11,
+                        TimeEfficiency = 1.15,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Gold Chain",
+                        CategoryId = 4,
+                        LvlRequirement = 12,
+                        TimeEfficiency = 1.10,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Gold Necklace With Aquamarine",
+                        CategoryId = 4,
+                        LvlRequirement = 12,
+                        TimeEfficiency = 1.15,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Gold Ring",
+                        CategoryId = 4,
+                        LvlRequirement = 12,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Silver Ring With Tsavorite",
+                        CategoryId = 4,
+                        LvlRequirement = 12,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Cobalt Ring With Tanzanite",
+                        CategoryId = 4,
+                        LvlRequirement = 12,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Copper Earpiece With Tanzanite",
+                        CategoryId = 4,
+                        LvlRequirement = 13,
+                        TimeEfficiency = 1.17,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Silver Ring With Tanzanite",
+                        CategoryId = 4,
+                        LvlRequirement = 13,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Gold Bracelet",
+                        CategoryId = 4,
+                        LvlRequirement = 13,
+                        TimeEfficiency = 1.12,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Gold Bracelet With Aquamarine",
+                        CategoryId = 4,
+                        LvlRequirement = 14,
+                        TimeEfficiency = 1.12,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Gold Earpiece",
+                        CategoryId = 4,
+                        LvlRequirement = 14,
+                        TimeEfficiency = 1.17,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Silver Bracelet With Tanzanite",
+                        CategoryId = 4,
+                        LvlRequirement = 14,
+                        TimeEfficiency = 1.12,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Gold Necklace With Emerald",
+                        CategoryId = 4,
+                        LvlRequirement = 14,
+                        TimeEfficiency = 1.17,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Gold Ring With Ruby",
+                        CategoryId = 4,
+                        LvlRequirement = 14,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Cobalt Necklace With Tanzanite",
+                        CategoryId = 4,
+                        LvlRequirement = 14,
+                        TimeEfficiency = 1.17,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Cobalt Bracelet With Ruby",
+                        CategoryId = 4,
+                        LvlRequirement = 15,
+                        TimeEfficiency = 1.12,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Silver Ring With Diamond",
+                        CategoryId = 4,
+                        LvlRequirement = 15,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Gold Bracelet With Diamond",
+                        CategoryId = 4,
+                        LvlRequirement = 15,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Silver Earpiece With Tanzanite",
+                        CategoryId = 4,
+                        LvlRequirement = 15,
+                        TimeEfficiency = 1.20,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Gold Necklace With Diamond",
+                        CategoryId = 4,
+                        LvlRequirement = 16,
+                        TimeEfficiency = 1.15,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Gold Bracelet With Tanzanite",
+                        CategoryId = 4,
+                        LvlRequirement = 16,
+                        TimeEfficiency = 1.15,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "Gold Ring With Tsavorite",
+                        CategoryId = 4,
+                        LvlRequirement = 16,
+                        TimeEfficiency = 1.15,
+                        Price = 0
+                    },
+                    new Products
+                    {
+                        Name = "The One Ring",
+                        CategoryId = 4,
+                        LvlRequirement = 20,
+                        TimeEfficiency = 10,
+                        Price = 0
+                    }
 
 
                     );

@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 
-        public int RecipeId { get; set; }
+        public int? RecipeId { get; set; } // only recipe to craft the item
 
         public string Name { get; set; }
 

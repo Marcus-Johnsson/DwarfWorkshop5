@@ -26,10 +26,9 @@ namespace DwarfWorkshop5.Calculations
                     }
                     foreach (var material in recipe.MaterialsRequired)
                     {
-                        if (material.Material.CategoryId == 2) // bars
+                        if (material.Material.RecipeId != null) // if not null it has a recipe
                         {
                             var barRecipeId = mydb.Recipes.FirstOrDefault(r => r.Id == material.Material.RecipeId);
-                         
 
                             if (barRecipeId != null)
                             {
@@ -48,7 +47,7 @@ namespace DwarfWorkshop5.Calculations
                             var materialProduct = mydb.Products.FirstOrDefault(p => p.Id == material.Material.Id);
                             if (materialProduct != null)
                             {
-                                double materialCost = (materialProduct.Price * material.Quantity) * materialProduct.TimeEfficiency;
+                                double materialCost = (materialProduct.Price * material.Quantity);
                                 cost += materialCost; // no TimeEfficiency ?? yes? unsure,,
                             }
                         }
