@@ -10,7 +10,9 @@ namespace DwarfWorkshop5.AddToDataBase
         // CategoryId ore = 1 | bar = 2 | gem = 3 | finished product = 4 |
 
         // Finished product Time Effencie | Ring 10% |
-        public static void AddThingsToDataBase()
+
+        // Hej Micke! Allt här är inte "Med" i koden. Är här så om något händer kan jag börja om eller fortsätta enkelt med att bygga vidare efter uppgiften.
+        public static void AddProductsToDataBase()
         {
             using (var mydb = new MyDbContext())
             {
@@ -21,14 +23,14 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Iron Ore",
                         CategoryId = 1,
                         LvlRequirement = 1,
-                        TimeEfficiency = 1.05,
+                        TimeEfficiency = 0.05,
                     },
                     new Products
                     {
                         Name = "Copper Ore",
                         CategoryId = 1,
                         LvlRequirement = 2,
-                        TimeEfficiency = 1.05,
+                        TimeEfficiency = 0.05,
 
                     },
                     new Products
@@ -36,7 +38,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Cobalt Ore",
                         CategoryId = 1,
                         LvlRequirement = 5,
-                        TimeEfficiency = 1.05,
+                        TimeEfficiency = 0.05,
 
                     },
                     new Products
@@ -44,7 +46,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Silver Ore",
                         CategoryId = 1,
                         LvlRequirement = 8,
-                        TimeEfficiency = 1.05,
+                        TimeEfficiency = 0.05,
 
                     },
                     new Products
@@ -52,7 +54,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Gold Ore",
                         CategoryId = 1,
                         LvlRequirement = 12,
-                        TimeEfficiency = 1.05,
+                        TimeEfficiency = 0.05,
 
                     },
                     new Products
@@ -60,7 +62,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Iron Bar",
                         CategoryId = 2,
                         LvlRequirement = 1,
-                        TimeEfficiency = 1.05,
+                        TimeEfficiency = 0.05,
 
                     },
                     new Products
@@ -68,7 +70,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Copper Bar",
                         CategoryId = 2,
                         LvlRequirement = 2,
-                        TimeEfficiency = 1.10,
+                        TimeEfficiency = 0.10,
 
                     },
                     new Products
@@ -76,7 +78,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Cobalt Bar",
                         CategoryId = 2,
                         LvlRequirement = 5,
-                        TimeEfficiency = 1.15,
+                        TimeEfficiency = 0.15,
 
                     },
                     new Products
@@ -84,7 +86,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Silver Bar",
                         CategoryId = 2,
                         LvlRequirement = 8,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
 
                     },
                     new Products
@@ -92,7 +94,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Gold Bar",
                         CategoryId = 2,
                         LvlRequirement = 12,
-                        TimeEfficiency = 1.25,
+                        TimeEfficiency = 0.25,
 
                     },
                     new Products
@@ -100,7 +102,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Aquamarine",
                         CategoryId = 3,
                         LvlRequirement = 3,
-                        TimeEfficiency = 1.10,
+                        TimeEfficiency = 0.10,
                         Price = 5500
                     },
                     new Products
@@ -108,7 +110,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Emerald",
                         CategoryId = 3,
                         LvlRequirement = 6,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 10000
                     },
                     new Products
@@ -116,7 +118,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Ruby",
                         CategoryId = 3,
                         LvlRequirement = 9,
-                        TimeEfficiency = 1.30,
+                        TimeEfficiency = 0.30,
                         Price = 15000
                     },
                     new Products
@@ -124,7 +126,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Tsavorite",
                         CategoryId = 3,
                         LvlRequirement = 11,
-                        TimeEfficiency = 1.50,
+                        TimeEfficiency = 0.50,
                         Price = 25000
                     },
                     new Products
@@ -132,7 +134,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Tanzanite",
                         CategoryId = 3,
                         LvlRequirement = 13,
-                        TimeEfficiency = 1.75,
+                        TimeEfficiency = 0.75,
                         Price = 50000
                     },
                     new Products
@@ -148,7 +150,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Iron Ring",
                         CategoryId = 4,
                         LvlRequirement = 1,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -156,7 +158,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Iron Chain",
                         CategoryId = 4,
                         LvlRequirement = 1,
-                        TimeEfficiency = 1.1,
+                        TimeEfficiency = 0.1,
                         Price = 0
                     },
                     new Products
@@ -164,7 +166,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Iron Necklace",
                         CategoryId = 4,
                         LvlRequirement = 2,
-                        TimeEfficiency = 1.15,
+                        TimeEfficiency = 0.15,
                         Price = 0
                     },
                     new Products
@@ -172,7 +174,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Copper Ring",
                         CategoryId = 4,
                         LvlRequirement = 2,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -180,7 +182,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Copper Chain",
                         CategoryId = 4,
                         LvlRequirement = 2,
-                        TimeEfficiency = 1.1,
+                        TimeEfficiency = 0.1,
                         Price = 0
                     },
                     new Products
@@ -188,7 +190,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Iron EarPiece",
                         CategoryId = 4,
                         LvlRequirement = 3,
-                        TimeEfficiency = 1.17,
+                        TimeEfficiency = 0.17,
                         Price = 0
                     },
                     new Products
@@ -196,7 +198,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Iron Bracelet",
                         CategoryId = 4,
                         LvlRequirement = 3,
-                        TimeEfficiency = 1.12,
+                        TimeEfficiency = 0.12,
                         Price = 0
                     },
                     new Products
@@ -204,7 +206,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Copper Bracelet",
                         CategoryId = 4,
                         LvlRequirement = 3,
-                        TimeEfficiency = 1.12,
+                        TimeEfficiency = 0.12,
                         Price = 0
                     },
                     new Products
@@ -212,7 +214,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Iron Ring with Aquamarine",
                         CategoryId = 4,
                         LvlRequirement = 4,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -220,7 +222,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Copper Ring with Aquamarine",
                         CategoryId = 4,
                         LvlRequirement = 4,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -228,7 +230,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Copper Necklace",
                         CategoryId = 4,
                         LvlRequirement = 4,
-                        TimeEfficiency = 1.15,
+                        TimeEfficiency = 0.15,
                         Price = 0
                     },
                     new Products
@@ -236,7 +238,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Cobalt Chain",
                         CategoryId = 4,
                         LvlRequirement = 5,
-                        TimeEfficiency = 1.10,
+                        TimeEfficiency = 0.10,
                         Price = 0
                     },
                     new Products
@@ -244,7 +246,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Cobalt Ring",
                         CategoryId = 4,
                         LvlRequirement = 5,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -252,7 +254,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Copper Earpiece",
                         CategoryId = 4,
                         LvlRequirement = 5,
-                        TimeEfficiency = 1.17,
+                        TimeEfficiency = 0.17,
                         Price = 0
                     },
                     new Products
@@ -260,7 +262,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Copper Bracelet With Emerald",
                         CategoryId = 4,
                         LvlRequirement = 6,
-                        TimeEfficiency = 1.12,
+                        TimeEfficiency = 0.12,
                         Price = 0
                     },
                     new Products
@@ -268,7 +270,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Cobalt Ring With Aquamarine",
                         CategoryId = 4,
                         LvlRequirement = 6,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -276,7 +278,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Cobalt Bracelet",
                         CategoryId = 4,
                         LvlRequirement = 6,
-                        TimeEfficiency = 1.12,
+                        TimeEfficiency = 0.12,
                         Price = 0
                     },
                     new Products
@@ -284,7 +286,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Silver Chain",
                         CategoryId = 4,
                         LvlRequirement = 7,
-                        TimeEfficiency = 1.10,
+                        TimeEfficiency = 0.10,
                         Price = 0
                     },
                     new Products
@@ -292,7 +294,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Silver Ring",
                         CategoryId = 4,
                         LvlRequirement = 7,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -300,7 +302,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Copper Earpiece With Emerald",
                         CategoryId = 4,
                         LvlRequirement = 7,
-                        TimeEfficiency = 1.17,
+                        TimeEfficiency = 0.17,
                         Price = 0
                     },
                     new Products
@@ -308,7 +310,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Silver Bracelet With Aquamarine",
                         CategoryId = 4,
                         LvlRequirement = 8,
-                        TimeEfficiency = 1.12,
+                        TimeEfficiency = 0.12,
                         Price = 0
                     },
                     new Products
@@ -316,7 +318,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Cobalt Earpiece With Ruby",
                         CategoryId = 4,
                         LvlRequirement = 8,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -324,7 +326,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Silver Bracelet",
                         CategoryId = 4,
                         LvlRequirement = 9,
-                        TimeEfficiency = 1.12,
+                        TimeEfficiency = 0.12,
                         Price = 0
                     },
                     new Products
@@ -332,7 +334,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Cobalt Necklace With Ruby",
                         CategoryId = 4,
                         LvlRequirement = 9,
-                        TimeEfficiency = 1.15,
+                        TimeEfficiency = 0.15,
                         Price = 0
                     },
                     new Products
@@ -340,7 +342,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Silver Earpiece With Ruby",
                         CategoryId = 4,
                         LvlRequirement = 10,
-                        TimeEfficiency = 1.17,
+                        TimeEfficiency = 0.17,
                         Price = 0
                     },
                     new Products
@@ -348,7 +350,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Silver Earpiece With Emerald",
                         CategoryId = 4,
                         LvlRequirement = 10,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -356,7 +358,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Copper Braclet With Tsavorite",
                         CategoryId = 4,
                         LvlRequirement = 10,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -364,7 +366,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Cobalt Ring With Tsavorite",
                         CategoryId = 4,
                         LvlRequirement = 10,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -372,7 +374,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Iron Elephant With Emeralds",
                         CategoryId = 4,
                         LvlRequirement = 11,
-                        TimeEfficiency = 1.50,
+                        TimeEfficiency = 0.50,
                         Price = 0
                     },
                     new Products
@@ -380,7 +382,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Cobalt Earpiece With Aquamarine",
                         CategoryId = 4,
                         LvlRequirement = 11,
-                        TimeEfficiency = 1.17,
+                        TimeEfficiency = 0.17,
                         Price = 0
                     },
                     new Products
@@ -388,7 +390,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Silver Necklace With Ruby",
                         CategoryId = 4,
                         LvlRequirement = 11,
-                        TimeEfficiency = 1.15,
+                        TimeEfficiency = 0.15,
                         Price = 0
                     },
                     new Products
@@ -396,7 +398,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Gold Chain",
                         CategoryId = 4,
                         LvlRequirement = 12,
-                        TimeEfficiency = 1.10,
+                        TimeEfficiency = 0.10,
                         Price = 0
                     },
                     new Products
@@ -404,7 +406,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Gold Necklace With Aquamarine",
                         CategoryId = 4,
                         LvlRequirement = 12,
-                        TimeEfficiency = 1.15,
+                        TimeEfficiency = 0.15,
                         Price = 0
                     },
                     new Products
@@ -412,7 +414,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Gold Ring",
                         CategoryId = 4,
                         LvlRequirement = 12,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -420,7 +422,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Silver Ring With Tsavorite",
                         CategoryId = 4,
                         LvlRequirement = 12,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -428,7 +430,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Cobalt Ring With Tanzanite",
                         CategoryId = 4,
                         LvlRequirement = 12,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -436,7 +438,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Copper Earpiece With Tanzanite",
                         CategoryId = 4,
                         LvlRequirement = 13,
-                        TimeEfficiency = 1.17,
+                        TimeEfficiency = 0.17,
                         Price = 0
                     },
                     new Products
@@ -444,7 +446,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Silver Ring With Tanzanite",
                         CategoryId = 4,
                         LvlRequirement = 13,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -452,7 +454,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Gold Bracelet",
                         CategoryId = 4,
                         LvlRequirement = 13,
-                        TimeEfficiency = 1.12,
+                        TimeEfficiency = 0.12,
                         Price = 0
                     },
                     new Products
@@ -460,7 +462,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Gold Bracelet With Aquamarine",
                         CategoryId = 4,
                         LvlRequirement = 14,
-                        TimeEfficiency = 1.12,
+                        TimeEfficiency = 0.12,
                         Price = 0
                     },
                     new Products
@@ -468,7 +470,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Gold Earpiece",
                         CategoryId = 4,
                         LvlRequirement = 14,
-                        TimeEfficiency = 1.17,
+                        TimeEfficiency = 0.17,
                         Price = 0
                     },
                     new Products
@@ -476,7 +478,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Silver Bracelet With Tanzanite",
                         CategoryId = 4,
                         LvlRequirement = 14,
-                        TimeEfficiency = 1.12,
+                        TimeEfficiency = 0.12,
                         Price = 0
                     },
                     new Products
@@ -484,7 +486,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Gold Necklace With Emerald",
                         CategoryId = 4,
                         LvlRequirement = 14,
-                        TimeEfficiency = 1.17,
+                        TimeEfficiency = 0.17,
                         Price = 0
                     },
                     new Products
@@ -492,7 +494,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Gold Ring With Ruby",
                         CategoryId = 4,
                         LvlRequirement = 14,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -500,7 +502,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Cobalt Necklace With Tanzanite",
                         CategoryId = 4,
                         LvlRequirement = 14,
-                        TimeEfficiency = 1.17,
+                        TimeEfficiency = 0.17,
                         Price = 0
                     },
                     new Products
@@ -508,7 +510,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Cobalt Bracelet With Ruby",
                         CategoryId = 4,
                         LvlRequirement = 15,
-                        TimeEfficiency = 1.12,
+                        TimeEfficiency = 0.12,
                         Price = 0
                     },
                     new Products
@@ -516,7 +518,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Silver Ring With Diamond",
                         CategoryId = 4,
                         LvlRequirement = 15,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -524,7 +526,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Gold Bracelet With Diamond",
                         CategoryId = 4,
                         LvlRequirement = 15,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -532,7 +534,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Silver Earpiece With Tanzanite",
                         CategoryId = 4,
                         LvlRequirement = 15,
-                        TimeEfficiency = 1.20,
+                        TimeEfficiency = 0.20,
                         Price = 0
                     },
                     new Products
@@ -540,7 +542,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Gold Necklace With Diamond",
                         CategoryId = 4,
                         LvlRequirement = 16,
-                        TimeEfficiency = 1.15,
+                        TimeEfficiency = 0.15,
                         Price = 0
                     },
                     new Products
@@ -548,7 +550,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Gold Bracelet With Tanzanite",
                         CategoryId = 4,
                         LvlRequirement = 16,
-                        TimeEfficiency = 1.15,
+                        TimeEfficiency = 0.15,
                         Price = 0
                     },
                     new Products
@@ -556,7 +558,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Name = "Gold Ring With Tsavorite",
                         CategoryId = 4,
                         LvlRequirement = 16,
-                        TimeEfficiency = 1.15,
+                        TimeEfficiency = 0.15,
                         Price = 0
                     },
                     new Products
@@ -567,11 +569,24 @@ namespace DwarfWorkshop5.AddToDataBase
                         TimeEfficiency = 10,
                         Price = 0
                     }
-
-
                     );
+                mydb.SaveChanges();
             }
         }
+
+        //public static void CreateRecipe()
+        //{
+        //    using (var mydb = new MyDbContext())
+        //    {
+        //        var ironBarReq = new Recipe.MaterialRequirement
+        //        {
+        //            ProductId = ,
+        //            Material = ,
+        //            Quantity = 4
+        //        };
+        //    }
+        //}
+
 
     }
 }

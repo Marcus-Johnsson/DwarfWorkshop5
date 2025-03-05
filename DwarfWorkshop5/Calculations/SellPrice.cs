@@ -18,6 +18,7 @@ namespace DwarfWorkshop5.Calculations
                         continue; // ensure that ore/gem price is not changed
                     }
                     double cost = 0;
+                    double timeEfficiency = 1;
                     var recipe = mydb.Recipes.FirstOrDefault(p => p.Id == product.RecipeId);
 
                     if (recipe == null)
@@ -36,7 +37,8 @@ namespace DwarfWorkshop5.Calculations
                                 
                                 if (oreMaterial != null)
                                 {
-                                    double barPrice = ((material.Quantity * oreMaterial.Quantity) * barRecipeId.Product.Price) * material.Material.TimeEfficiency;
+                                    double barPrice = ((material.Quantity * oreMaterial.Quantity) * oreMaterial.Material.Price);
+                                    timeEfficiency += material.Material.TimeEfficiency;
 
                                     cost += barPrice;
                                 }
@@ -48,10 +50,12 @@ namespace DwarfWorkshop5.Calculations
                             if (materialProduct != null)
                             {
                                 double materialCost = (materialProduct.Price * material.Quantity);
-                                cost += materialCost; // no TimeEfficiency ?? yes? unsure,,
+                                timeEfficiency += material.Material.TimeEfficiency;
+                                cost += materialCost; 
                             }
                         }
                     }
+                    cost *= timeEfficiency;
                 product.Price = cost;
                 }
             }

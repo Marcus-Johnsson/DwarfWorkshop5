@@ -5,7 +5,6 @@
 
         public int Id { get; set; }
         public int ProductId { get; set; }
-        public Products Product { get; set; } // can remove?
 
         public double WorkTime { get; set; }
 
@@ -16,8 +15,8 @@
         public class MaterialRequirement
         {
             public int Id { get; set; }
-            public int ProductId { get; set; } // can remove
-            public Products Material { get; set; }
+            public int ProductId { get; set; } 
+            public int MaterialId { get; set; }
             public int Quantity { get; set; }
         }
     }
