@@ -27,9 +27,11 @@ namespace DwarfWorkshop5.Calculations
                     }
                     foreach (var material in recipe.MaterialsRequired)
                     {
-                        if (material.Material.RecipeId != null) // if not null it has a recipe
+                        var productId = everyProducts.FirstOrDefault(p => p.RecipeId == recipe.Id);
+                        var materialRecipe = mydb.Recipes.Where(p => p.ProductId == productId.Id).FirstOrDefault(); 
+                        if (materialRecipe.MaterialsRequired != null) // if not null it has a recipe
                         {
-                            var barRecipeId = mydb.Recipes.FirstOrDefault(r => r.Id == material.Material.RecipeId);
+                            var barRecipeId = mydb.Recipes.FirstOrDefault(r => r.Id == productId.RecipeId);
 
                             if (barRecipeId != null)
                             {
@@ -37,8 +39,8 @@ namespace DwarfWorkshop5.Calculations
                                 
                                 if (oreMaterial != null)
                                 {
-                                    double barPrice = ((material.Quantity * oreMaterial.Quantity) * oreMaterial.Material.Price);
-                                    timeEfficiency += material.Material.TimeEfficiency;
+                                    double barPrice = ((material.Quantity * oreMaterial.Quantity) * productId.Price);
+                                    timeEfficiency += productId.TimeEfficiency;
 
                                     cost += barPrice;
                                 }
@@ -46,11 +48,11 @@ namespace DwarfWorkshop5.Calculations
                         }
                         else
                         {
-                            var materialProduct = mydb.Products.FirstOrDefault(p => p.Id == material.Material.Id);
+                            var materialProduct = mydb.Products.FirstOrDefault(p => p.Id == productId.Id);
                             if (materialProduct != null)
                             {
                                 double materialCost = (materialProduct.Price * material.Quantity);
-                                timeEfficiency += material.Material.TimeEfficiency;
+                                timeEfficiency += productId.TimeEfficiency;
                                 cost += materialCost; 
                             }
                         }

@@ -19,5 +19,7 @@ namespace DwarfWorkshop5.Models
         public double TotalSale { get; set; }
 
         public int TokenAmount { get; set; }
+
+        public DateTime DateTime { get; set; }
     }
 }

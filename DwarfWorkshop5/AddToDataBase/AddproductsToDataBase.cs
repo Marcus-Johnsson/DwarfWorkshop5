@@ -574,19 +574,989 @@ namespace DwarfWorkshop5.AddToDataBase
             }
         }
 
-        //public static void CreateRecipe()
-        //{
-        //    using (var mydb = new MyDbContext())
-        //    {
-        //        var ironBarReq = new Recipe.MaterialRequirement
-        //        {
-        //            ProductId = ,
-        //            Material = ,
-        //            Quantity = 4
-        //        };
-        //    }
-        //}
+        public static void CreateRecipe()
+        {
+            using (var mydb = new MyDbContext())
+            {
+                mydb.AddRange(
+                new Recipe
+                {
+                    ProductId = 6,
+                    WorkTime = 5,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 1,
+                            Quantity = 4
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 7,
+                    WorkTime = 6,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+                                MaterialId = 2,
+                                Quantity = 4
+                         }
+                    }
+                },
 
 
+                new Recipe
+                {
+                    ProductId = 8,
+                    WorkTime = 7,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 3,
+                            Quantity = 4
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 9,
+                    WorkTime = 8,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 4,
+                            Quantity = 4
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 10,
+                    WorkTime = 9,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 5,
+                            Quantity = 4
+                        }
+                    }
+                },
+                new Recipe  // iron ring
+                {
+                    ProductId = 17,
+                    WorkTime = 10,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 6,
+                            Quantity = 3
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 18,
+                    WorkTime = 15,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 6,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 19,
+                    WorkTime = 13,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 6,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 20,
+                    WorkTime = 25,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 7,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 21,
+                    WorkTime = 20,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 7,
+                            Quantity = 3
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 22,
+                    WorkTime = 15,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 6,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 23,
+                    WorkTime = 20,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 6,
+                            Quantity = 4
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 24,
+                    WorkTime = 30,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 7,
+                            Quantity = 4
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 25,
+                    WorkTime = 120,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 6,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 11,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 26,
+                    WorkTime = 240,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 7,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 11,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 27,
+                    WorkTime = 25,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 7,
+                            Quantity = 3
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 28,
+                    WorkTime = 80,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 8,
+                            Quantity = 3
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 29,
+                    WorkTime = 95,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 8,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 30,
+                    WorkTime = 35,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 7,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 31,
+                    WorkTime = 350,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 7,
+                            Quantity = 4
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 12,
+                            Quantity = 12
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 32,
+                    WorkTime = 600,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 8,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 11,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 33,
+                    WorkTime = 120,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 8,
+                            Quantity = 4
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 34,
+                    WorkTime = 1000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 9,
+                            Quantity = 3
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 35,
+                    WorkTime = 200,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 8,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 36,
+                    WorkTime = 380,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 7,
+                            Quantity = 1
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 12,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 37,
+                    WorkTime = 2200,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 9,
+                            Quantity = 4
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 12,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 38,
+                    WorkTime = 3800,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 8,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 13,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 39,
+                    WorkTime = 1000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 9,
+                            Quantity = 4
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 40,
+                    WorkTime = 3000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 8,
+                            Quantity = 3
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 13,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 41,
+                    WorkTime = 5500,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 9,
+                            Quantity = 1
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 13,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 42,
+                    WorkTime = 3800,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 9,
+                            Quantity = 1
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 12,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 43,
+                    WorkTime = 4000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 7,
+                            Quantity = 4
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 14,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 44,
+                    WorkTime = 5800,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 8,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 8,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 45,
+                    WorkTime = 1800,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 6,
+                            Quantity = 20
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 12,
+                            Quantity = 3
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 46,
+                    WorkTime = 2200,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 8,
+                            Quantity = 1
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 11,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 47,
+                    WorkTime = 5400,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 9,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 13,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 48,
+                    WorkTime = 3000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 10,
+                            Quantity = 3
+                        },
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 49,
+                    WorkTime = 4200,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 10,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 11,
+                            Quantity = 3
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 50,
+                    WorkTime = 3800,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 10,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 51,
+                    WorkTime = 6000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 10,
+                            Quantity =2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 10,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 52,
+                    WorkTime = 6500,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 8,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 15,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 53,
+                    WorkTime = 5000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 7,
+                            Quantity = 1
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 15,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 54,
+                    WorkTime = 8000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 9,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 15,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 55,
+                    WorkTime = 4500,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 10,
+                            Quantity = 4
+                        },
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 56,
+                    WorkTime = 7000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 10,
+                            Quantity = 4
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 11,
+                            Quantity = 4
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 57,
+                    WorkTime = 4900,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 10,
+                            Quantity = 1
+                        },
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 58,
+                    WorkTime = 9200,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 9,
+                            Quantity = 4
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 15,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 59,
+                    WorkTime = 7500,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 10,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 12,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 60,
+                    WorkTime = 8500,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 10,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 13,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 61,
+                    WorkTime = 6250,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 8,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 14,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 62,
+                    WorkTime = 4900,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 8,
+                            Quantity = 4
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 13,
+                            Quantity = 3
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 63,
+                    WorkTime = 12000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 9,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 15,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 64,
+                    WorkTime = 16000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 10,
+                            Quantity = 4
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 15,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 65,
+                    WorkTime = 10000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 9,
+                            Quantity = 1
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 14,
+                            Quantity = 1
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 66,
+                    WorkTime = 18000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 10,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 15,
+                            Quantity = 2
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 67,
+                    WorkTime = 12000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 10,
+                            Quantity = 4
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 14,
+                            Quantity = 3
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 68,
+                    WorkTime = 8000,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 10,
+                            Quantity = 2
+                        },
+                        new Recipe.MaterialRequirement
+                        {
+                            MaterialId = 13,
+                            Quantity = 4
+                        }
+                    }
+                },
+                new Recipe
+                {
+                    ProductId = 69,
+                    WorkTime = 2678400,
+                    MaterialsRequired =
+                    {
+                        new Recipe.MaterialRequirement
+                        {
+
+                            MaterialId = 10,
+                            Quantity = 100
+                        },
+                    }
+                }
+             
+                );
+
+            }
+        }
     }
+
+
 }
+

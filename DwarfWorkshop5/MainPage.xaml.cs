@@ -7,6 +7,7 @@
         public MainPage()
         {
             InitializeComponent();
+            
         }
 
         private void OnQuitButtonClicked(object sender, EventArgs e)
