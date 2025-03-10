@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace DwarfWorkshop5.Migrations
 {
     /// <inheritdoc />
-    public partial class Recipe : Migration
+    public partial class reformed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,10 +17,11 @@ namespace DwarfWorkshop5.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EffifencyRank = table.Column<int>(type: "int", nullable: false),
                     QualityRank = table.Column<int>(type: "int", nullable: false),
-                    WorkOrder = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WorkOrder = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rank = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -47,10 +49,10 @@ namespace DwarfWorkshop5.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RecipeId = table.Column<int>(type: "int", nullable: false),
-                    IsMaterial = table.Column<bool>(type: "bit", nullable: false),
-                    IsBar = table.Column<bool>(type: "bit", nullable: false),
-                    TimeEfficiency = table.Column<int>(type: "int", nullable: false),
+                    RecipeId = table.Column<int>(type: "int", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    TimeEfficiency = table.Column<double>(type: "float", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     LvlRequirement = table.Column<int>(type: "int", nullable: false),
                     ProductsId = table.Column<int>(type: "int", nullable: true)
@@ -63,6 +65,20 @@ namespace DwarfWorkshop5.Migrations
                         column: x => x.ProductsId,
                         principalTable: "Products",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Recipes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    WorkTime = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Recipes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -90,7 +106,8 @@ namespace DwarfWorkshop5.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gold = table.Column<double>(type: "float", nullable: false),
                     TotalSale = table.Column<double>(type: "float", nullable: false),
-                    TokenAmount = table.Column<int>(type: "int", nullable: false)
+                    TokenAmount = table.Column<int>(type: "int", nullable: false),
+                    LastSave = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,33 +120,14 @@ namespace DwarfWorkshop5.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     DwarfId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Progress = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WorkOrder", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Recipes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    ProductId1 = table.Column<int>(type: "int", nullable: false),
-                    WorkTime = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Recipes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Recipes_Products_ProductId1",
-                        column: x => x.ProductId1,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -146,22 +144,11 @@ namespace DwarfWorkshop5.Migrations
                 {
                     table.PrimaryKey("PK_MaterialRequirement", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MaterialRequirement_Products_MaterialId",
-                        column: x => x.MaterialId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_MaterialRequirement_Recipes_RecipeId",
                         column: x => x.RecipeId,
                         principalTable: "Recipes",
                         principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MaterialRequirement_MaterialId",
-                table: "MaterialRequirement",
-                column: "MaterialId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MaterialRequirement_RecipeId",
@@ -172,11 +159,6 @@ namespace DwarfWorkshop5.Migrations
                 name: "IX_Products_ProductsId",
                 table: "Products",
                 column: "ProductsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Recipes_ProductId1",
-                table: "Recipes",
-                column: "ProductId1");
         }
 
         /// <inheritdoc />
@@ -192,6 +174,9 @@ namespace DwarfWorkshop5.Migrations
                 name: "MaterialRequirement");
 
             migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
                 name: "Shop");
 
             migrationBuilder.DropTable(
@@ -202,9 +187,6 @@ namespace DwarfWorkshop5.Migrations
 
             migrationBuilder.DropTable(
                 name: "Recipes");
-
-            migrationBuilder.DropTable(
-                name: "Products");
         }
     }
 }

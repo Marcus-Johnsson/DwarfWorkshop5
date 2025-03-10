@@ -10,8 +10,11 @@ namespace DwarfWorkshop5.Models
     {
         public int Id { get; set; }
 
+        public int UserId { get; set; }
         public int DwarfId { get; set; }
 
         public int ProductId { get; set; }
+
+        public int Progress { get; set; }
     }
 }

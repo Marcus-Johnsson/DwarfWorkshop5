@@ -18,7 +18,7 @@ namespace DwarfWorkshop5.Models
 
         public int Demand { get; set; }
 
-        private double DemandReduceRate = 0.2; 
+        private double DemandReduceRate = 0.2;
 
 
         public Shop()

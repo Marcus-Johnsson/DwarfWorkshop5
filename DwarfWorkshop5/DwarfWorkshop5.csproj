@@ -71,8 +71,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ViewPageModel\" />
-	  <Folder Include="View\" />
+	  <MauiXaml Update="View\LoadingPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Migrations\" />
 	</ItemGroup>
 
 </Project>

@@ -17,7 +17,7 @@
         public int LvlRequirement { get; set; }
 
         public List<Products> ProductsMadeFrom { get; set; }
-    
+
 
 
 
