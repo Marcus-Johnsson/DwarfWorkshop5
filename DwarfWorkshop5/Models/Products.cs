@@ -1,6 +1,6 @@
 ﻿namespace DwarfWorkshop5.Models
 {
-    class Products
+    public class Products
     {
         public int Id { get; set; }
 
@@ -16,7 +16,6 @@
 
         public int LvlRequirement { get; set; }
 
-        public List<Products> ProductsMadeFrom { get; set; }
 
 
 

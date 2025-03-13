@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DwarfWorkshop5.Models
 {
-    class Shop
+    public class Shop
     {
 
         public int Id { get; set; }

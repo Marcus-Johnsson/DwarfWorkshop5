@@ -9,7 +9,8 @@ namespace DwarfWorkshop5.AddToDataBase
         {
             using (var mydb = new MyDbContext())
             {
-                var numberOfDwarfs = mydb.Dwarfs.Where(p => p.UserId == GetSetData.GetCurrentUser()).ToList();
+                var currentUser = GetSetData.GetCurrentUser();
+                var numberOfDwarfs = mydb.Dwarfs.Where(p => p.UserId == currentUser.Id).ToList();
                 if (numberOfDwarfs.Count >= 5)
                 {
                     // Safty net
@@ -18,7 +19,7 @@ namespace DwarfWorkshop5.AddToDataBase
                 {
                     var dwarf = new Dwarfs()
                     {
-                        UserId = GetSetData.GetCurrentUser(),
+                        UserId = currentUser.Id,
                         QualityRank = 1,
                         EffifencyRank = 1,
                         Rank = 1,

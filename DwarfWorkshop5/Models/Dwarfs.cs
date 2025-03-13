@@ -7,7 +7,7 @@ using Windows.ApplicationModel.Appointments.DataProvider;
 
 namespace DwarfWorkshop5.Models
 {
-    class Dwarfs
+    public class Dwarfs
     {
         public int Id { get; set; }
 
@@ -19,7 +19,7 @@ namespace DwarfWorkshop5.Models
 
         public int QualityRank { get; set; }
 
-        public List<int>? WorkOrder { get; set; }
+        public List<int>? RecipeChoices { get; set; }
 
         public int Rank { get; set; }
 

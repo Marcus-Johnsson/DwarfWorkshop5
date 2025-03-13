@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DwarfWorkshop5.Models
 {
-    class User
+    public class User
     {
         public int Id { get; set; }
 
@@ -19,6 +19,8 @@ namespace DwarfWorkshop5.Models
         public double TotalSale { get; set; }
 
         public int TokenAmount { get; set; }
+
+        public int Lvl { get; set; }
 
         public DateTime LastSave { get; set; }
     }

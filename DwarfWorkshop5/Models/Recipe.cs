@@ -1,6 +1,6 @@
 ﻿namespace DwarfWorkshop5.Models
 {
-    class Recipe
+    public class Recipe
     {
 
         public int Id { get; set; }

@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace DwarfWorkshop5.Models
 {
-    class WorkOrder
+    public class WorkOrder
     {
         public int Id { get; set; }
 
         public int UserId { get; set; }
-        public int DwarfId { get; set; }
+        public List<int>? DwarfId { get; set; }
 
         public int ProductId { get; set; }
+
+        public bool Active { get; set; }
 
         public int Progress { get; set; }
     }

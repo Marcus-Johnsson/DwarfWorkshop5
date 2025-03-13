@@ -7,9 +7,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DwarfWorkshop5.Models
 {
-    internal class MyDbContext : DbContext
-    { 
-        
+    public class MyDbContext : DbContext
+    {
+        private static readonly MyDbContext InstanceOfClas = new MyDbContext();
+
+        public MyDbContext()
+        {
+            
+        }
         public DbSet<Dwarfs> Dwarfs { get; set; } 
         public DbSet<Inventory> Inventory { get; set; }
         public DbSet<Products> Products { get; set; }

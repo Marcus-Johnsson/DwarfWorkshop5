@@ -1,12 +1,20 @@
-﻿namespace DwarfWorkshop5
+﻿using DwarfWorkshop5.Models;
+using System.Threading.Tasks;
+
+namespace DwarfWorkshop5
 {
     public partial class MainPage : ContentPage
     {
-       
+        private readonly User _user;
+        private readonly MyDbContext _mydb;
 
-        public MainPage()
+        public MainPage(MyDbContext myDb, User user)
         {
             InitializeComponent();
+            _user = user;
+            _mydb = myDb;
+            //AddToDataBase.AddproductsToDataBase.AddProductsToDataBase();
+            //AddToDataBase.AddproductsToDataBase.CreateRecipe();
             
         }
 
@@ -14,14 +22,14 @@
         {
             Application.Current.Quit();
         }
-        private void OnLoginClicked(object sender, EventArgs e)
+        private async void OnLoginClicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new View.Signin());
+           await Navigation.PushAsync(new View.Signin(_mydb,_user));
         }
 
-        private void OnRegisterButtonClicked(object sender, EventArgs e)
+        private async void OnRegisterButtonClicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new View.register());
+            await Navigation.PushAsync(new View.register(_mydb,_user));
         }
     }
 

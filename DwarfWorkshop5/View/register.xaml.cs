@@ -1,27 +1,36 @@
+using Azure;
 using DwarfWorkhop5;
+using DwarfWorkshop5.AddToDataBase;
+using DwarfWorkshop5.Models;
 using Microsoft.Data.SqlClient;
 
 namespace DwarfWorkshop5.View;
 
 public partial class register : ContentPage
 {
-    public register()
+    private RegisterUser _registeruser;
+    private readonly MyDbContext _mydb;
+    private readonly User _user;
+    public register(MyDbContext mydb,User user, RegisterUser registerUser = null)
     {
         InitializeComponent();
+        _user = user;
+        _mydb = mydb;
+        _registeruser = new RegisterUser();
     }
 
-    private void OnCreateAccountClicked(System.Object sender, System.EventArgs e)
+    private async void OnCreateAccountClicked(System.Object sender, System.EventArgs e)
     {
         string username = UsernameEntry.Text;
         string password = PasswordEntryFirst.Text;
-        AddToDataBase.RegisterUser.CreateNewUserStep1(username, password);
+        _registeruser.CreateNewUserStep1(username, password);
 
-        Navigation.PushAsync(new View.GamePage());
+        await Navigation.PushAsync(new View.LoadingPage("register", _mydb,_user));
     }
 
-    private void OnCancelClicked(System.Object sender, System.EventArgs e)
+    private async void OnCancelClicked(System.Object sender, System.EventArgs e)
     {
-        Navigation.PopAsync();
+        await Navigation.PushAsync(new MainPage(_mydb,_user));
     }
 
     private async void OnUserNameTextChanged(object sender, TextChangedEventArgs e)
@@ -58,13 +67,15 @@ public partial class register : ContentPage
 
         using (var connection = new SqlConnection(GetSetData.GetConnectionString()))
         {
+
             await connection.OpenAsync();
-            string query = "SELECT COUNT(*) FROM User WHERE Username = @Username";
+            string query = "SELECT COUNT(*) FROM [User] WHERE Username = @Username";
 
             using (var command = new SqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@Username", username);
+                command.Parameters.AddWithValue("@Username" , username);
                 int count = (int)await command.ExecuteScalarAsync();
+     
                 return count == 0;
             }
         }

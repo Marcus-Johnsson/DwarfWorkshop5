@@ -1550,7 +1550,9 @@ namespace DwarfWorkshop5.AddToDataBase
                         },
                     }
                 }
+                
                 );
+                mydb.SaveChanges();
             }
         }
     }

@@ -1,18 +1,26 @@
+using DwarfWorkshop5.Models;
+using Microsoft.Windows.Management.Deployment;
+using System.Threading.Tasks;
+
 namespace DwarfWorkshop5.View;
 
 public partial class Signin : ContentPage
 {
-	public Signin()
+    private readonly MyDbContext _mydb;
+    private readonly User _user;
+	public Signin(MyDbContext mydb, User user)
 	{
 		InitializeComponent();
+        _mydb = mydb;
+        _user = user;
 	}
-    private void OnLoginClicked(System.Object sender, System.EventArgs e)
+    private async void OnLoginClicked(System.Object sender, System.EventArgs e)
     {
-        Navigation.PushAsync(new GamePage());
+        await Navigation.PushAsync(new LoadingPage("signin", _mydb, _user));
     }
 
-    private void OnCancelButtonClicked(System.Object sender, System.EventArgs e)
+    private async void OnCancelButtonClicked(System.Object sender, System.EventArgs e)
     {
-        Navigation.PopAsync();
+        await Navigation.PopAsync();
     }
 }
