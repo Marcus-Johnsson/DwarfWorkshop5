@@ -6,17 +6,18 @@ using Microsoft.Data.SqlClient;
 
 namespace DwarfWorkshop5.View;
 
-public partial class register : ContentPage
+public partial class Register : ContentPage
 {
-    private RegisterUser _registeruser;
+    private readonly RegisterUser _registeruser;
     private readonly MyDbContext _mydb;
     private readonly User _user;
-    public register(MyDbContext mydb,User user, RegisterUser registerUser = null)
+    public Register(MyDbContext mydb,User user, RegisterUser registerUser)
     {
         InitializeComponent();
         _user = user;
         _mydb = mydb;
-        _registeruser = new RegisterUser();
+        _registeruser = registerUser;
+       
     }
 
     private async void OnCreateAccountClicked(System.Object sender, System.EventArgs e)
@@ -44,7 +45,7 @@ public partial class register : ContentPage
             return;
         }
 
-        bool isAvailable = await CheckUsername(username);
+        bool isAvailable = await Helpers.CheckUsername(username);
 
         if (isAvailable)
         {

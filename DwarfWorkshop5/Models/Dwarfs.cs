@@ -23,6 +23,10 @@ namespace DwarfWorkshop5.Models
 
         public int Rank { get; set; }
 
+        public bool Unlocked { get; set; }
+
+
+
 
     }    
 }

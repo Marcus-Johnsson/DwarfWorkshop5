@@ -1,4 +1,6 @@
-﻿using DwarfWorkshop5.Models;
+﻿using DwarfWorkshop5.AddToDataBase;
+using DwarfWorkshop5.Models;
+using DwarfWorkshop5.View;
 using System.Threading.Tasks;
 
 namespace DwarfWorkshop5
@@ -8,11 +10,13 @@ namespace DwarfWorkshop5
         private readonly User _user;
         private readonly MyDbContext _mydb;
 
+
         public MainPage(MyDbContext myDb, User user)
         {
             InitializeComponent();
             _user = user;
             _mydb = myDb;
+ 
             //AddToDataBase.AddproductsToDataBase.AddProductsToDataBase();
             //AddToDataBase.AddproductsToDataBase.CreateRecipe();
             
@@ -29,7 +33,7 @@ namespace DwarfWorkshop5
 
         private async void OnRegisterButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new View.register(_mydb,_user));
+            await Navigation.PushAsync(new View.Register(_mydb,_user));
         }
     }
 

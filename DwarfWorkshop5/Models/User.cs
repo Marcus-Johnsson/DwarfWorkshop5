@@ -20,7 +20,7 @@ namespace DwarfWorkshop5.Models
 
         public int TokenAmount { get; set; }
 
-        public int Lvl { get; set; }
+        public int Lvl { get; set; } = 1;
 
         public DateTime LastSave { get; set; }
     }

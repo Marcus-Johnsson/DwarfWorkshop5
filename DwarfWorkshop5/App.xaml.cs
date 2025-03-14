@@ -1,4 +1,6 @@
-﻿using DwarfWorkshop5.Models;
+﻿using DwarfWorkshop5.AddToDataBase;
+using DwarfWorkshop5.Models;
+
 
 namespace DwarfWorkshop5
 {
@@ -10,6 +12,7 @@ namespace DwarfWorkshop5
 
             MyDbContext _mydb = new MyDbContext();
             User _user = new User();
+
             MainPage = new NavigationPage(new MainPage(_mydb, _user));
         }
 

@@ -5,7 +5,12 @@ namespace DwarfWorkshop5.AddToDataBase
 {
     public class RegisterUser
     {
+        private readonly Helpers _helpers;
 
+        public RegisterUser(Helpers helpers)
+        {
+            _helpers = helpers;
+        }
 
         public void CreateNewUserStep1(string username, string password)
         {
@@ -16,7 +21,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     Gold = 0,
                     Username = username,
                     Password = password,
-                    TokenAmount = 0,
+                    TokenAmount = 2,
                     TotalSale = 0,
                     LastSave = DateTime.UtcNow,
                     Lvl = 1
@@ -24,9 +29,10 @@ namespace DwarfWorkshop5.AddToDataBase
                 };
                 mydb.Add(user);
                 mydb.SaveChanges();
-
+                _helpers.CreateDwarfs();
                 LoggInUser(username);
                 CreateStartInventory();
+
             }
 
         }
@@ -46,14 +52,15 @@ namespace DwarfWorkshop5.AddToDataBase
             {
                 var currentUser = GetSetData.GetCurrentUser();
 
-                mydb.Add(new Inventory
-
-                {   
-                    UserId = currentUser.Id,
-                    ProductId = 1,
-                    Quality = false,
-                    Quantity = 20
-                });
+                mydb.Add(
+                    new Inventory
+                    {
+                        UserId = currentUser.Id,
+                        ProductId = 1,
+                        Quality = false,
+                        Quantity = 20
+                    });
+               
                 mydb.SaveChanges();
             }
 

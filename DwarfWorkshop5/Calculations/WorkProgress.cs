@@ -7,6 +7,7 @@ namespace DwarfWorkshop5.Calculations
     {
         public void CalculateWorkProgress(double runTime)
         {
+            var currentUser = GetSetData.GetCurrentUser();
             using (var mydb = new MyDbContext())
             {
                 Random rng = new Random();
@@ -16,7 +17,7 @@ namespace DwarfWorkshop5.Calculations
 
                     try
                     {
-                        var everyOrder = mydb.WorkOrder.Where(p => p.Progress < 100 && p.UserId == GetSetData.GetCurrentUser().Id && p.Active == true).ToList();
+                        var everyOrder = mydb.WorkOrder.Where(p => p.Progress < 100 && p.UserId == currentUser.Id && p.Active == true).ToList();
                         var groupedOrders = everyOrder
                                     .GroupBy(order => new
                                     { order.UserId, order.ProductId })

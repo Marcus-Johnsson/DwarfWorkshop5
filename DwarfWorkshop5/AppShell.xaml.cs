@@ -10,7 +10,7 @@ namespace DwarfWorkshop5
             InitializeComponent();
             Routing.RegisterRoute("Game", typeof(GamePage));
             Routing.RegisterRoute("SignIn", typeof(Signin));
-            Routing.RegisterRoute("Register", typeof(register));
+            Routing.RegisterRoute("Register", typeof(Register));
         }
     
       public async Task NavigateToGame()
