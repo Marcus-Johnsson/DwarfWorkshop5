@@ -1,4 +1,5 @@
 ﻿using DwarfWorkhop5;
+using DwarfWorkshop5.DataCheck;
 using DwarfWorkshop5.Models;
 
 namespace DwarfWorkshop5.AddToDataBase
@@ -42,20 +43,23 @@ namespace DwarfWorkshop5.AddToDataBase
             {
                 var currentUser = mydb.User.Where(p => p.Username == username).FirstOrDefault();
 
-                GetSetData.SetCurrentUser(currentUser.Id);
+                var session = UserSession.GetInstance();
+                session.SetUser(currentUser.Id);
             }
 
         }
         public void CreateStartInventory()
         {
+            var session = UserSession.GetInstance();
+            User? loggedInUser = session.GetCurrentUser();
             using (var mydb = new MyDbContext())
             {
-                var currentUser = GetSetData.GetCurrentUser();
+           
 
                 mydb.Add(
                     new Inventory
                     {
-                        UserId = currentUser.Id,
+                        UserId = loggedInUser.Id,
                         ProductId = 1,
                         Quality = false,
                         Quantity = 20

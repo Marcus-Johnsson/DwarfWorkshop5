@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using DwarfWorkshop5.DesignPattern;
 using CustomButtonHandler = DwarfWorkshop5.DesignPattern.ButtonHandler;
 using DwarfWorkshop5.ViewPageModel;
+using WinRT.DwarfWorkshop5VtableClasses;
+using DwarfWorkshop5.DataCheck;
 
 
 namespace DwarfWorkshop5.View;
@@ -15,19 +17,27 @@ public partial class GamePage : ContentPage
 {
     private readonly MyDbContext _mydb;
     private readonly Helpers _helpers;
+    private readonly UserSession _session;
+    private User? _currentUser;
 
-    public GamePage(string page, MyDbContext mydb, User user, Helpers helpers )
+    
+       
+
+    public GamePage(string page, MyDbContext mydb, User user, Helpers helpers)
     {
+        _session = UserSession.GetInstance();
+        _currentUser = _session.GetCurrentUser();
+    
         InitializeComponent();
         _mydb = mydb;
         _helpers = helpers;
-        CallInfo(page);
+       
         BindingContext = new GamePageModelViews(_mydb);
 
-        Username.Text = GetSetData.GetCurrentUser().Username;
+        Username.Text = _currentUser.Username;
         CheckBuyDwarfButton();
-
-    }
+          CallInfo(page);
+    }     
     private async void CallInfo(string page)
     {
         if (page == "register")
@@ -61,12 +71,6 @@ public partial class GamePage : ContentPage
 
     }
 
-    private void OnBuyDwarfClicked(object sender, EventArgs e)
-    {
-        var handler = new DesignPattern.ButtonHandler(new BuyDwarfShopCommand(_mydb, (GamePageModelViews)BindingContext));
-        handler.OnClick();
-        OnPropertyChanged(nameof(ViewPageModel.GamePageModelViews.Token));
-    }
     private void CheckBuyDwarfButton()
     {
         if(!_helpers.CheckDwarfAvailable().Result)

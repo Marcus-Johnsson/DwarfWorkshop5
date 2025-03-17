@@ -1,4 +1,5 @@
 ﻿using DwarfWorkhop5;
+using DwarfWorkshop5.DataCheck;
 using DwarfWorkshop5.Models;
 
 namespace DwarfWorkshop5.ViewPageModel
@@ -6,13 +7,15 @@ namespace DwarfWorkshop5.ViewPageModel
     public class LoadingPage
     {
         private readonly MyDbContext _myDbContext;
-
+        private readonly UserSession _session;
         private LoadingPage(MyDbContext myDbContext)
         {
             _myDbContext = myDbContext;
+            _session = UserSession.GetInstance();
         }
         public void CalculateWorkProgress(double runTime)
         {
+            var currentUser = _session.GetCurrentUser();
             Random rng = new Random();
             for (int i = 0; i < runTime; i++)
             {
@@ -20,7 +23,7 @@ namespace DwarfWorkshop5.ViewPageModel
 
                 try
                 {
-                    var everyOrder = _myDbContext.WorkOrder.Where(p => p.Progress < 100 && p.UserId == GetSetData.GetCurrentUser().Id && p.Active == true).ToList();
+                    var everyOrder = _myDbContext.WorkOrder.Where(p => p.Progress < 100 && p.UserId == currentUser.Id && p.Active == true).ToList();
                     var groupedOrders = everyOrder
                                 .GroupBy(order => new
                                 { order.UserId, order.ProductId })
@@ -98,9 +101,10 @@ namespace DwarfWorkshop5.ViewPageModel
         }
         public void AddToInventory( int workOrder, bool quality)
         {
+            var currentUser = _session.GetCurrentUser();
+
             try
             {
-                var currentUser = GetSetData.GetCurrentUser();
                 var inventory = _myDbContext.Inventory.Where(p => p.UserId == currentUser.Id && p.ProductId == workOrder && p.Quality == quality).FirstOrDefault();
 
                 var product = _myDbContext.Products.Where(p => p.Id == workOrder).SingleOrDefault();
@@ -142,7 +146,9 @@ namespace DwarfWorkshop5.ViewPageModel
         }
         public double CalculateTime()
         {
-            var lastSave = _myDbContext.User.Where(p => p.Id == GetSetData.GetCurrentUser().Id).FirstOrDefault();
+            var currentUser = _session.GetCurrentUser();
+
+            var lastSave = _myDbContext.User.Where(p => p.Id == currentUser.Id).FirstOrDefault();
 
 
             DateTime endTime = DateTime.UtcNow;
@@ -162,15 +168,16 @@ namespace DwarfWorkshop5.ViewPageModel
 
         public bool RemoveMaterialForRecipe(int recipeId, int dwarfId)
         {
+            var currentUser = _session.GetCurrentUser();
+
             var recipe = _myDbContext.Recipes.Where
                     (p => p.Id == recipeId).FirstOrDefault();
 
             if (recipe == null) { return false; }
 
-            var userId = GetSetData.GetCurrentUser();
 
 
-            var inventory = _myDbContext.Inventory.Where(p => p.UserId == userId.Id).ToDictionary(p => p.ProductId, p => p);
+            var inventory = _myDbContext.Inventory.Where(p => p.UserId == currentUser.Id).ToDictionary(p => p.ProductId, p => p);
             foreach (var requiredMaterial in recipe.MaterialsRequired)
             {
                 if (!inventory.TryGetValue(requiredMaterial.MaterialId, out var inventoryItem) || inventoryItem.Quantity < requiredMaterial.Quantity) // Using a linq to get inventoryItem aswell as controll quantity. Super!!
@@ -191,7 +198,7 @@ namespace DwarfWorkshop5.ViewPageModel
                         ProductId = recipe.ProductId,
                         Active = true,
                         Progress = 0,
-                        UserId = userId.Id,
+                        UserId = currentUser.Id,
                         DwarfId = { dwarfId }
                     });
                     _myDbContext.SaveChanges();

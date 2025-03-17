@@ -1,6 +1,7 @@
 ﻿using DwarfWorkshop5.AddToDataBase;
 using DwarfWorkshop5.Models;
 using Microsoft.Extensions.Logging;
+using CommunityToolkit.Maui.Core;
 
 namespace DwarfWorkshop5;
 
@@ -9,7 +10,9 @@ public static class MauiProgram
 	public static MauiApp CreateMauiApp()
 	{
 
-		var builder = MauiApp.CreateBuilder();
+       
+
+        var builder = MauiApp.CreateBuilder();
 
 		builder
 
@@ -22,6 +25,7 @@ public static class MauiProgram
 			});
 		
 			builder.Services.AddSingleton<MyDbContext>();
+			builder.UseMauiApp<App>().UseMauiCommunityToolkitCore();
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

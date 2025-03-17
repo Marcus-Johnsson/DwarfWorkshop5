@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:Models="clr-namespace:DwarfWorkshop5.Models"
              x:Class="DwarfWorkshop5.View.GamePage"
+             xmlns:ViewModels="clr-namespace:DwarfWorkshop5.ViewPageModel"
+             x:DataType="ViewModels:GamePageModelViews"
+             
              Title="GamePage">
     <VerticalStackLayout>
         <Border
@@ -183,14 +186,14 @@
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="30" VerticalOptions="Center">
 
 
-                    <CollectionView ItemsSource="{Binding UnlockedDwarfs}" SelectionMode="Single" Margin="15" IsEnabled="False">
-                        <CollectionView.ItemTemplate>
+                    <CollectionView ItemsSource="{Binding UnlockedDwarfs}" Margin="15" >
+                        <CollectionView.ItemTemplate x:DataType="Model:Dwarfs">
                             <DataTemplate>
                                 <Button 
                 x:Name="DwarfButtons"
-                Text="{Binding Name}"
+                Text="{x:Binding Name}"
                 TextColor="Gold"
-                Command="{Binding Path=BindingContext.SelectDwarfCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                Command="{Binding SelectDwarfCommand}"
                 CommandParameter="{Binding .}"
                 Background="Gray"
                 BorderColor="Beige"
@@ -202,7 +205,7 @@
 
                     <Button
                           x:Name="BuyDwarf"
-                          Clicked="OnBuyDwarfClicked"
+                          Command="{Binding BuyDwarfCommandCommand}"
                           Text="Buy Dwarf"
                           Background="Gray"
                           BorderColor="Beige"
@@ -233,7 +236,7 @@
                     Spacing="25"
                             WidthRequest="500"
                             HorizontalOptions="Start"
-                            IsVisible="False"
+                            IsVisible="True"
                             >
 
                     <VerticalStackLayout
@@ -320,15 +323,12 @@
 
 
             </Border>
-            <Button
-        Text="{Binding SelectedQuantityButtonText}"
-        Command="{Binding ChangeQuantityCommand}"
-        BackgroundColor="Gray"
-        />
+           
             <ScrollView
                      Grid.Row="3"
                     HorizontalOptions="Start"
                     Padding="55"
+                    IsVisible="False"
                     >
                 <StackLayout>
                     <VerticalStackLayout>
@@ -352,11 +352,54 @@
                                             
                                             <Button
                                 Text="Buy"
-                                Command="{Binding BindingContext.BuyProductCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                Command="{Binding BuyCommand}"
                                 CommandParameter="{Binding .}"
                                 BackgroundColor="Green" />
                                         </VerticalStackLayout>
                                      
+
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </Border>
+
+                    </VerticalStackLayout>
+                </StackLayout>
+            </ScrollView>
+            <ScrollView
+         Grid.Row="3"
+        HorizontalOptions="Start"
+        Padding="55"
+        IsVisible="False"
+        >
+                <StackLayout>
+                    <VerticalStackLayout>
+                        <Border
+                    WidthRequest="500"
+                    HeightRequest="50"
+                    Stroke="Black"
+                    StrokeThickness="2"
+                   >
+                            <CollectionView
+                        ItemsSource="{Binding ShopGems}" SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <VerticalStackLayout Spacing="25">
+                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding Inventory}" />
+                                            <Label Text="{Binding Price}" />
+
+
+
+
+                                            <Button
+                    Text="Buy"
+                    Command="{Binding BuyCommand}"
+                    CommandParameter="{Binding .}"
+                    BackgroundColor="Green" />
+                                        </VerticalStackLayout>
+
 
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>

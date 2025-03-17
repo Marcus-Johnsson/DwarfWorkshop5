@@ -13,9 +13,10 @@ namespace DwarfWorkshop5
         private readonly MyDbContext _mydb;
         private readonly RegisterUser _registerUser;
         private readonly Helpers _helpers;
-
+        
         public MainPage(MyDbContext myDb, User user, RegisterUser registerUser, Helpers helpers)
         {
+
             InitializeComponent();
             _user = user;
             _mydb = myDb;
@@ -24,7 +25,7 @@ namespace DwarfWorkshop5
             UserSession.Logout();
 
 
-            //AddToDataBase.AddproductsToDataBase.AddProductsToDataBase();   Highest product so far 4554 ;..; 69 times added to database yay
+            //AddToDataBase.AddproductsToDataBase.AddProductsToDataBase(); //  Highest product so far 4554 ;..; 69 times added to database yay
             //AddToDataBase.AddproductsToDataBase.CreateRecipe();
 
         }

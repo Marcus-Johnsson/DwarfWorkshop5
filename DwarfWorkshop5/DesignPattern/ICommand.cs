@@ -1,10 +1,11 @@
 ﻿using DwarfWorkhop5;
+using DwarfWorkshop5.DataCheck;
 using DwarfWorkshop5.Models;
 using DwarfWorkshop5.ViewPageModel;
 
 namespace DwarfWorkshop5.DesignPattern
 {
-    public interface ICommand
+     interface ICommand
     {
 
         void Execute();
@@ -12,7 +13,7 @@ namespace DwarfWorkshop5.DesignPattern
     }
 
 
-    public class ButtonHandler
+     class ButtonHandler
     {
         private readonly ICommand _command;
 
@@ -24,6 +25,7 @@ namespace DwarfWorkshop5.DesignPattern
         public void OnClick()
         {
             _command.Execute();
+            
         }
     }
 
@@ -32,16 +34,22 @@ namespace DwarfWorkshop5.DesignPattern
     public class BuyDwarfShopCommand : ICommand
     {
         private readonly MyDbContext _mydb;
+        private readonly UserSession _session;
+
+
+  
         private readonly GamePageModelViews _viewModel;
         public BuyDwarfShopCommand(MyDbContext mydb, GamePageModelViews viewModel)
         {
             _mydb = mydb;
             _viewModel = viewModel;
+            _session = UserSession.GetInstance();
+           
         }
 
         public void Execute()
         {
-            var currentUser = _mydb.User.FirstOrDefault(u => u.Id == GetSetData.GetCurrentUser().Id);
+            var currentUser = _session.GetCurrentUser();
             var userDwarf = _mydb.Dwarfs.FirstOrDefault(p => p.UserId == currentUser.Id && p.Unlocked == false);
 
             if (userDwarf == null || currentUser == null || currentUser.TokenAmount < 2)
@@ -55,7 +63,7 @@ namespace DwarfWorkshop5.DesignPattern
                 _viewModel.UnlockedDwarfs.Add(userDwarf);
                 _viewModel.Token = currentUser.TokenAmount;
                 _mydb.SaveChanges();
-
+               
             }
         }
     }
@@ -63,29 +71,35 @@ namespace DwarfWorkshop5.DesignPattern
     {
         private readonly MyDbContext _mydb;
         private readonly GamePageModelViews _viewModel;
+        private readonly UserSession _session;
+
+       
         public BuyUserLvl(MyDbContext mydb, GamePageModelViews viewModel)
         {
             _mydb = mydb;
             _viewModel = viewModel;
+            _session = UserSession.GetInstance();
         }
 
         public void Execute()
         {
-            var currentUser = _mydb.User.FirstOrDefault(u => u.Id == GetSetData.GetCurrentUser().Id);
+            var currentUser = _session.GetCurrentUser();
+            var UserSaveInfo = _mydb.User.FirstOrDefault(u => u.Id == currentUser.Id);  
 
 
-            if (currentUser.TokenAmount < 2 * currentUser.Lvl)
+            if (UserSaveInfo.TokenAmount < 2 * currentUser.Lvl)
             {
 
             }
             else
             {
-                currentUser.TokenAmount -= 2 * currentUser.Lvl;
-                _viewModel.Token = currentUser.TokenAmount;
+                UserSaveInfo.TokenAmount -= 2 * currentUser.Lvl;
+                _viewModel.Token = UserSaveInfo.TokenAmount;
                 _mydb.SaveChanges();
 
             }
         }
+        
     }
     //public class UpgradeDwarfsCommand : ICommand<Task>
     //{

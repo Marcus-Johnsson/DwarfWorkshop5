@@ -1,13 +1,23 @@
 ﻿using DwarfWorkhop5;
+using DwarfWorkshop5.DataCheck;
 using DwarfWorkshop5.Models;
 
 namespace DwarfWorkshop5.Calculations
 {
     class WorkProgress
     {
+        private readonly UserSession _session;
+
+        public WorkProgress()
+        {
+            _session = UserSession.GetInstance();
+           
+        }
         public void CalculateWorkProgress(double runTime)
         {
-            var currentUser = GetSetData.GetCurrentUser();
+            var currentUser = _session.GetCurrentUser();
+
+
             using (var mydb = new MyDbContext())
             {
                 Random rng = new Random();
@@ -95,11 +105,12 @@ namespace DwarfWorkshop5.Calculations
         }
         public void AddToInventory(int workOrder, bool quality)
         {
+            var currentUser = _session.GetCurrentUser();
+
             using (var mydb = new MyDbContext())
             {
                 try
                 {
-                    var currentUser = GetSetData.GetCurrentUser();
 
                     var inventory = mydb.Inventory.Where(p => p.UserId == currentUser.Id && p.ProductId == workOrder && p.Quality == quality).FirstOrDefault();
 
@@ -144,9 +155,10 @@ namespace DwarfWorkshop5.Calculations
         }
         public double CalculateTime()
         {
+            var currentUser = _session.GetCurrentUser();
             using (var mydb = new MyDbContext())
             {
-                var lastSave = mydb.User.Where(p => p.Id == GetSetData.GetCurrentUser().Id).FirstOrDefault();
+                var lastSave = mydb.User.Where(p => p.Id == currentUser.Id).FirstOrDefault();
 
                 DateTime endTime = DateTime.UtcNow;
 
@@ -165,16 +177,17 @@ namespace DwarfWorkshop5.Calculations
 
         public bool RemoveMaterialForRecipe(int recipeId, int dwarfId)
         {
+            var currentUser = _session.GetCurrentUser();
+
             using (var mydb = new MyDbContext())
             {
                 var recipe = mydb.Recipes.Where
                                     (p => p.Id == recipeId).FirstOrDefault();
 
                 if (recipe == null) { return false; }
-                var userId = GetSetData.GetCurrentUser();
 
 
-                var inventory = mydb.Inventory.Where(p => p.UserId == userId.Id).ToDictionary(p => p.ProductId, p => p);
+                var inventory = mydb.Inventory.Where(p => p.UserId == currentUser.Id).ToDictionary(p => p.ProductId, p => p);
                 foreach (var requiredMaterial in recipe.MaterialsRequired)
                 {
                     if (!inventory.TryGetValue(requiredMaterial.MaterialId, out var inventoryItem) || inventoryItem.Quantity < requiredMaterial.Quantity) // Using a linq to get inventoryItem aswell as controll quantity. Super!!
@@ -195,7 +208,7 @@ namespace DwarfWorkshop5.Calculations
                             ProductId = recipe.ProductId,
                             Active = true,
                             Progress = 0,
-                            UserId = userId.Id,
+                            UserId = currentUser.Id,
                             DwarfId = { dwarfId }
                         });
                         mydb.SaveChanges();

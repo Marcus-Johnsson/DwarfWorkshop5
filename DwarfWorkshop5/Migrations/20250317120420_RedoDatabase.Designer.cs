@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DwarfWorkshop5.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20250314200545_fixDatabase")]
-    partial class fixDatabase
+    [Migration("20250317120420_RedoDatabase")]
+    partial class RedoDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

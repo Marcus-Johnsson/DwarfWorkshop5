@@ -1,15 +1,21 @@
-﻿using DwarfWorkshop5.Models;
+﻿using DwarfWorkshop5.DataCheck;
+using DwarfWorkshop5.Models;
 using Microsoft.Data.SqlClient;
 
 namespace DwarfWorkhop5
 {
     public class Helpers
     {
+        private readonly UserSession _session;
+
+        
         private readonly MyDbContext _mydb;
 
         public Helpers(MyDbContext dbContext)
         {
             _mydb = dbContext;
+            _session = UserSession.GetInstance();
+     
         }
         public static async Task<bool> CheckUsername(string username)
         {
@@ -39,7 +45,8 @@ namespace DwarfWorkhop5
 
                 if (userControll != null)
                 {
-                    GetSetData.SetCurrentUser(userControll.Id);
+                    var session = UserSession.GetInstance();
+                    session.SetUser(userControll.Id);
                     return true;
                 }
 
@@ -53,7 +60,8 @@ namespace DwarfWorkhop5
 
         public async Task<bool> CheckDwarfAvailable()
         {
-            var count = _mydb.Dwarfs.Where(p => p.UserId == GetSetData.GetCurrentUser().Id
+            var currentUser = _session.GetCurrentUser();
+            var count = _mydb.Dwarfs.Where(p => p.UserId == currentUser.Id
                                      && p.Unlocked == false).Count();
             if (count == 0)
             {
@@ -64,6 +72,9 @@ namespace DwarfWorkhop5
 
         public void CreateDwarfs()
         {
+            var currentUser = _session.GetCurrentUser();
+            
+
             for (int i = 0; i < 5; i++)
             {
                var newDwarf = new Dwarfs
@@ -72,7 +83,7 @@ namespace DwarfWorkhop5
                     QualityRank = 0,
                     Rank = 1,
                     Unlocked = false,
-                    UserId = GetSetData.GetCurrentUser().Id,
+                    UserId = currentUser.Id,
                     Name = GetDwarfName().Result
 
 

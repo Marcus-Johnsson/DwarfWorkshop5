@@ -4,31 +4,32 @@ namespace DwarfWorkshop5.DataCheck
 {
     class UserSession
     {
-        private static User _currentUser;
-
-        public static User GetCurrentUser()
-        {
-            if (_currentUser == null)
-            {
-                using (var mydb = new MyDbContext())
-                {
-                    _currentUser = mydb.User.SingleOrDefault(p => p.Id == _userId);
-                }
-            }
-            return _currentUser;
-        }
-
+        private static User? _currentUser;
+       
         private static int _userId;
 
-        public static void SetCurrentUser(int userId)
+
+        private static readonly UserSession _instance = new UserSession();
+
+        private UserSession() { }
+        public static UserSession GetInstance()
+        {
+            return _instance;
+        }
+ 
+        public void SetUser(int userId)
         {
             _userId = userId;
             using (var mydb = new MyDbContext())
             {
-                _currentUser = mydb.User.SingleOrDefault(p => p.Id == userId);
+                _currentUser = mydb.User.SingleOrDefault(p => p.Id == _userId);
             }
         }
 
+        public User? GetCurrentUser()
+        {
+            return _currentUser;
+        }
         public static void Logout()
         {
             _currentUser = null;
