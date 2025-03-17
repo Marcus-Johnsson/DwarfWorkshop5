@@ -46,6 +46,9 @@ namespace DwarfWorkshop5.Migrations
                     b.PrimitiveCollection<string>("RecipeChoices")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Unlocked")
+                        .HasColumnType("bit");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 

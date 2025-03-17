@@ -11,12 +11,14 @@ public partial class Register : ContentPage
     private readonly RegisterUser _registeruser;
     private readonly MyDbContext _mydb;
     private readonly User _user;
-    public Register(MyDbContext mydb,User user, RegisterUser registerUser)
+    private readonly Helpers _help;
+    public Register(MyDbContext mydb,User user, RegisterUser registerUser, Helpers helpers)
     {
         InitializeComponent();
         _user = user;
         _mydb = mydb;
         _registeruser = registerUser;
+        _help = helpers;
        
     }
 
@@ -26,12 +28,12 @@ public partial class Register : ContentPage
         string password = PasswordEntryFirst.Text;
         _registeruser.CreateNewUserStep1(username, password);
 
-        await Navigation.PushAsync(new View.LoadingPage("register", _mydb,_user));
+        await Navigation.PushAsync(new View.LoadingPage("register", _mydb,_user, _help));
     }
 
     private async void OnCancelClicked(System.Object sender, System.EventArgs e)
     {
-        await Navigation.PushAsync(new MainPage(_mydb,_user));
+        await Navigation.PushAsync(new MainPage(_mydb,_user, _registeruser, _help));
     }
 
     private async void OnUserNameTextChanged(object sender, TextChangedEventArgs e)
@@ -61,26 +63,6 @@ public partial class Register : ContentPage
         }
     }
 
-
-    private async Task<bool> CheckUsername(string username)
-    {
-        await Task.Delay(500); // Important for not overloading database
-
-        using (var connection = new SqlConnection(GetSetData.GetConnectionString()))
-        {
-
-            await connection.OpenAsync();
-            string query = "SELECT COUNT(*) FROM [User] WHERE Username = @Username";
-
-            using (var command = new SqlCommand(query, connection))
-            {
-                command.Parameters.AddWithValue("@Username" , username);
-                int count = (int)await command.ExecuteScalarAsync();
-     
-                return count == 0;
-            }
-        }
-    }
 
     private async void OnPasswordTextChanged(object sender, TextChangedEventArgs e)
     {

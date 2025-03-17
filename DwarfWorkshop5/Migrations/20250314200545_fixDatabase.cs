@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DwarfWorkshop5.Migrations
 {
     /// <inheritdoc />
-    public partial class reformed : Migration
+    public partial class fixDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,8 +21,9 @@ namespace DwarfWorkshop5.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EffifencyRank = table.Column<int>(type: "int", nullable: false),
                     QualityRank = table.Column<int>(type: "int", nullable: false),
-                    WorkOrder = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Rank = table.Column<int>(type: "int", nullable: false)
+                    RecipeChoices = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rank = table.Column<int>(type: "int", nullable: false),
+                    Unlocked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -35,8 +36,10 @@ namespace DwarfWorkshop5.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Quality = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,17 +57,11 @@ namespace DwarfWorkshop5.Migrations
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     TimeEfficiency = table.Column<double>(type: "float", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    LvlRequirement = table.Column<int>(type: "int", nullable: false),
-                    ProductsId = table.Column<int>(type: "int", nullable: true)
+                    LvlRequirement = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_Products_ProductsId",
-                        column: x => x.ProductsId,
-                        principalTable: "Products",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -107,6 +104,7 @@ namespace DwarfWorkshop5.Migrations
                     Gold = table.Column<double>(type: "float", nullable: false),
                     TotalSale = table.Column<double>(type: "float", nullable: false),
                     TokenAmount = table.Column<int>(type: "int", nullable: false),
+                    Lvl = table.Column<int>(type: "int", nullable: false),
                     LastSave = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -121,8 +119,9 @@ namespace DwarfWorkshop5.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    DwarfId = table.Column<int>(type: "int", nullable: false),
+                    DwarfId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProductId = table.Column<int>(type: "int", nullable: false),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
                     Progress = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -154,11 +153,6 @@ namespace DwarfWorkshop5.Migrations
                 name: "IX_MaterialRequirement_RecipeId",
                 table: "MaterialRequirement",
                 column: "RecipeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_ProductsId",
-                table: "Products",
-                column: "ProductsId");
         }
 
         /// <inheritdoc />

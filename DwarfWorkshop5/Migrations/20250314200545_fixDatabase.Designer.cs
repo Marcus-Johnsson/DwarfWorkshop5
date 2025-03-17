@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DwarfWorkshop5.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20250310125040_reformed")]
-    partial class reformed
+    [Migration("20250314200545_fixDatabase")]
+    partial class fixDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,11 +46,14 @@ namespace DwarfWorkshop5.Migrations
                     b.Property<int>("Rank")
                         .HasColumnType("int");
 
+                    b.PrimitiveCollection<string>("RecipeChoices")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Unlocked")
+                        .HasColumnType("bit");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
-
-                    b.PrimitiveCollection<string>("WorkOrder")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -68,7 +71,13 @@ namespace DwarfWorkshop5.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Quality")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -97,9 +106,6 @@ namespace DwarfWorkshop5.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int?>("ProductsId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("RecipeId")
                         .HasColumnType("int");
 
@@ -107,8 +113,6 @@ namespace DwarfWorkshop5.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductsId");
 
                     b.ToTable("Products");
                 });
@@ -192,6 +196,9 @@ namespace DwarfWorkshop5.Migrations
                     b.Property<DateTime>("LastSave")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Lvl")
+                        .HasColumnType("int");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -219,8 +226,11 @@ namespace DwarfWorkshop5.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DwarfId")
-                        .HasColumnType("int");
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.PrimitiveCollection<string>("DwarfId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -236,23 +246,11 @@ namespace DwarfWorkshop5.Migrations
                     b.ToTable("WorkOrder");
                 });
 
-            modelBuilder.Entity("DwarfWorkshop5.Models.Products", b =>
-                {
-                    b.HasOne("DwarfWorkshop5.Models.Products", null)
-                        .WithMany("ProductsMadeFrom")
-                        .HasForeignKey("ProductsId");
-                });
-
             modelBuilder.Entity("DwarfWorkshop5.Models.Recipe+MaterialRequirement", b =>
                 {
                     b.HasOne("DwarfWorkshop5.Models.Recipe", null)
                         .WithMany("MaterialsRequired")
                         .HasForeignKey("RecipeId");
-                });
-
-            modelBuilder.Entity("DwarfWorkshop5.Models.Products", b =>
-                {
-                    b.Navigation("ProductsMadeFrom");
                 });
 
             modelBuilder.Entity("DwarfWorkshop5.Models.Recipe", b =>

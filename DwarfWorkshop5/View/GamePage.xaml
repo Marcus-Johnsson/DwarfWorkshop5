@@ -9,10 +9,27 @@
             Background="SaddleBrown"
             Stroke="Beige">
             <Grid
-            RowDefinitions="auto,auto,auto"
-            ColumnDefinitions="1100,auto,auto"
+            RowDefinitions="50,auto,auto"
+            ColumnDefinitions="200,200,200,200,250"
             Padding="10"
-            ColumnSpacing="50">
+            ColumnSpacing="100">
+                <Border
+                    Background="Black"
+                    Stroke="Beige"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Padding="7"  
+                    WidthRequest="200"
+                    HorizontalOptions="Start"
+                    >
+                    <Label 
+                         Text="{Binding Gold, StringFormat='{0} Gold'}"
+                         TextColor="Gold"
+                         HorizontalOptions="Fill" 
+                         HorizontalTextAlignment="End" 
+                         VerticalOptions="Center">
+                    </Label>
+                </Border>
                 <Border
                     Background="Black"
                     Stroke="Beige"
@@ -20,13 +37,31 @@
                     Grid.Column="1"
                     Padding="7"  
                     WidthRequest="200"
+                    HorizontalOptions="Center">
+                    <Label 
+                        x:Name="Username"
+                        Text=""
+                        TextColor="Gold"
+                        HorizontalOptions="Fill" 
+                        HorizontalTextAlignment="End" 
+                        VerticalOptions="Center">
+                    </Label>
+                </Border>
+
+                <Border
+                    Background="Black"
+                    Stroke="Beige"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Padding="7"  
+                    WidthRequest="200"
                     HorizontalOptions="Start"
                     >
                     <Label 
-                        Text="{Binding Gold, StringFormat='{0} Gold'}"
+                        Text="{Binding Token, StringFormat='{0} Token'}"
                         TextColor="Gold"
                         HorizontalOptions="Fill" 
-                        HorizontalTextAlignment="End"
+                        HorizontalTextAlignment="End" 
                         VerticalOptions="Center">
                     </Label>
                 </Border>
@@ -35,23 +70,33 @@
                     Stroke="Beige"
                     Padding="7"
                     Grid.Row="0"
-                    Grid.Column="2"
+                    Grid.Column="3"
                     WidthRequest="75"
-                    HorizontalOptions="Start">
+                    HorizontalOptions="End">
                     <Label 
                     Text="{Binding Lvl, StringFormat='     {0} LvL'}"
                         HorizontalOptions="Fill" 
                         HorizontalTextAlignment="End"
-                        VerticalOptions="Center"
->
-
+                        VerticalOptions="End">
                     </Label>
                 </Border>
+                <Button
+                     Clicked="OnBuyLvlClicked"
+                     Text="Buy LvL"
+                     Background="Gray"
+                     BorderColor="Beige"
+                     Grid.Column="4"
+                     Grid.Row="0"
+                     WidthRequest="175"
+                     Margin="15"
+                     HeightRequest="50"
+                     IsVisible="True">
+                </Button>
             </Grid>
         </Border>
-            <Grid
+        <Grid
                 RowDefinitions="auto,auto,80,auto"
-                ColumnDefinitions="auto,auto,auto"
+                ColumnDefinitions="auto,auto,auto,auto"
                
                 >
             <Border
@@ -64,37 +109,66 @@
                 >
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="30" VerticalOptions="Center">
                     <Button
-                Clicked="OnStoreClicked"
-                Text="Store"
-                Background="Gray"
-                BorderColor="Beige"
-                Grid.Column="1"
-                Grid.Row="1"
-                WidthRequest="200"
-                Margin="10"> </Button>
-
-            <Button
-                Clicked="OnInventoryClicked"
-                Text="Ínventory"
-                Background="Gray"
-                BorderColor="Beige"
-                Grid.Column="2"
-                Grid.Row="1"
-                WidthRequest="200"
-                Margin="10">
                 
-            </Button>
+      x:Name="OreButton"
+      Clicked="OnOreClicked"
+      Text="Ores"
+      Background="Gray"
+      BorderColor="Beige"
+      Grid.Column="1"
+      Grid.Row="1"
+      WidthRequest="200"
+      Margin="15"
+      IsVisible="True">
 
-            <Button
-                Text="Dwarfs"
-                Background="Gray"
-                BorderColor="Beige"
-                Grid.Column="2"
-                Grid.Row="1"
-                Clicked="OnDwarfsClicked"
-                WidthRequest="200"
-                Margin="10"></Button>
-                    
+                    </Button>
+
+                    <Button
+      x:Name="GemButton"
+      Clicked="OnGemsClicked"
+      Text="Gems"
+      Background="Gray"
+      BorderColor="Beige"
+      Grid.Column="2"
+      Grid.Row="1"
+      WidthRequest="200"
+      Margin="15"
+      IsVisible="True">
+
+                    </Button>
+
+
+
+                    <Button
+     x:Name="MaterialButton"
+     Clicked="OnMaterialClicked"
+     Text="Material"
+     Background="Gray"
+     BorderColor="Beige"
+     Grid.Column="1"
+     Grid.Row="1"
+     WidthRequest="200"
+     Margin="15"
+     IsVisible="True">
+
+                    </Button>
+
+                    <Button
+     x:Name="JewerlyButton"
+     Clicked="OnJewelryClicked"
+     Text="Jewelry"
+     Background="Gray"
+     BorderColor="Beige"
+     Grid.Column="2"
+     Grid.Row="1"
+     WidthRequest="200"
+     Margin="15"
+     IsVisible="True">
+
+                    </Button>
+
+
+
                 </HorizontalStackLayout>
 
             </Border>
@@ -107,182 +181,192 @@
                 Grid.ColumnSpan="3"
                 >
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="30" VerticalOptions="Center">
-                    <Button
-                        Clicked="OnOreClicked"
-                        Text="Ores"
-                        Background="Gray"
-                        BorderColor="Beige"
-                        Grid.Column="1"
-                        Grid.Row="1"
-                        WidthRequest="200"
-                        Margin="15"
-                        IsVisible="false">
-                        
-                    </Button>
+
+
+                    <CollectionView ItemsSource="{Binding UnlockedDwarfs}" SelectionMode="Single" Margin="15" IsEnabled="False">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Button 
+                x:Name="DwarfButtons"
+                Text="{Binding Name}"
+                TextColor="Gold"
+                Command="{Binding Path=BindingContext.SelectDwarfCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                CommandParameter="{Binding .}"
+                Background="Gray"
+                BorderColor="Beige"
+                WidthRequest="200">
+                                </Button>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
                     <Button
-                        Clicked="OnGemsClicked"
-                        Text="Gems"
-                        Background="Gray"
-                        BorderColor="Beige"
-                        Grid.Column="2"
-                        Grid.Row="1"
-                        WidthRequest="200"
-                        Margin="15"
-                        IsVisible="False">
-
-                    </Button>
-                    <Button
-                        Clicked="OnMaterialClicked"
-                        Text="Material"
-                        Background="Gray"
-                        BorderColor="Beige"
-                        Grid.Column="1"
-                        Grid.Row="1"
-                        WidthRequest="200"
-                        Margin="15"
-                        IsVisible="False">
-
-                    </Button>
-
-                    <Button
-                        Clicked="OnJewelryClicked"
-                        Text="Jewelry"
-                        Background="Gray"
-                        BorderColor="Beige"
-                        Grid.Column="2"
-                        Grid.Row="1"
-                        WidthRequest="200"
-                        Margin="15"
-                        IsVisible="False">
-
-                    </Button>
-                    <Button
-                         Clicked="OnDwarf1Clicked"
-                         Text="Dwarf1"
-                         Background="Gray"
-                         BorderColor="Beige"
-                         Grid.Column="2"
-                         Grid.Row="1"
-                         WidthRequest="200"
-                         Margin="15"
-                         IsVisible="False">
-                    </Button>
-                    <Button
-      Clicked="OnDwarf2Clicked"
-      Text="Dwarf2"
-      Background="Gray"
-      BorderColor="Beige"
-      Grid.Column="2"
-      Grid.Row="1"
-      WidthRequest="200"
-      Margin="15"
-      IsVisible="False">
-                    </Button>
-                    <Button
-      Clicked="OnDwarf3Clicked"
-      Text="Dwarf3"
-      Background="Gray"
-      BorderColor="Beige"
-      Grid.Column="2"
-      Grid.Row="1"
-      WidthRequest="200"
-      Margin="15"
-      IsVisible="False">
-                    </Button>
-                    <Button
-      Clicked="OnDwarf4Clicked"
-      Text="Dwarf4"
-      Background="Gray"
-      BorderColor="Beige"
-      Grid.Column="2"
-      Grid.Row="1"
-      WidthRequest="200"
-      Margin="15"
-      IsVisible="False">
-                    </Button>
-                    <Button
-      Clicked="OnDwarf5Clicked"
-      Text="Dwarf5"
-      Background="Gray"
-      BorderColor="Beige"
-      Grid.Column="2"
-      Grid.Row="1"
-      WidthRequest="200"
-      Margin="15"
-      IsVisible="False">
+                          x:Name="BuyDwarf"
+                          Clicked="OnBuyDwarfClicked"
+                          Text="Buy Dwarf"
+                          Background="Gray"
+                          BorderColor="Beige"
+                          Grid.Column="2"
+                          Grid.Row="1"
+                          WidthRequest="200"
+                          Margin="15"
+                          IsVisible="True">
                     </Button>
 
 
                 </HorizontalStackLayout >
 
             </Border>
+
             <Border
                 Background="SaddleBrown"
                 Stroke="Beige"
                 WidthRequest="1600"
-                HorizontalOptions="Center"
+                HorizontalOptions="Start"
                 Grid.Row="3"
-                Grid.ColumnSpan="3"
-                Padding="5">
-                <Grid
-                    VerticalOptions="Start"
-                    ColumnDefinitions="auto, auto"
-                    HorizontalOptions="Start" 
-                    Padding="15">
-                    <Border
-                        Stroke="Beige"
-                        Background="Transparent" 
-                        HeightRequest="500"
-                        HorizontalOptions="Start"
-                        WidthRequest="500">
+                Grid.ColumnSpan="0"
+                Padding="55">
 
-                        <StackLayout  
-                            HorizontalOptions="Center"
-                            VerticalOptions="Start"
-                            WidthRequest="200"
-                            Margin="20"
+
+                <!-- Dwarf Info -->
+                <StackLayout  
+                    Spacing="25"
+                            WidthRequest="500"
+                            HorizontalOptions="Start"
+                            IsVisible="False"
                             >
-                            <CollectionView ItemsSource="{Binding UnlockedDwarfs}">
+
+                    <VerticalStackLayout
+                            Grid.Row="1">
+
+                        <Border
+                                WidthRequest="500"
+                                HeightRequest="50"
+                                Stroke="Black"
+                                StrokeThickness="2">
+                            <Label
+                                    Text="{Binding SelectedDwarf.Name}"
+                                        
+                                           TextColor="Black"
+                                           Background="Gainsboro"
+                                           >
+                            </Label>
+                        </Border>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="5">
+                        <Border
+                                WidthRequest="500"
+                                HeightRequest="50"
+                                  Grid.Row="1"
+                                    Grid.Column="0"
+                                Background="White"
+                                Stroke="Black"
+                                StrokeThickness="2">
+                            <!-- Effifency Rank -->
+                            <Label
+                                    Text="{Binding SelectedDwarf.EffifencyRank}"
+                              
+                                    TextColor="Gold"
+                                    Background="Gainsboro"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"/>
+                        </Border>
+
+                        <Button 
+                                    Text="Buy Efficiency Rank"
+                                    Background="Gray"
+                                    TextColor="Gold"
+                                    Clicked="OnEffifencyRankBoughtClicked"/>
+
+                    </VerticalStackLayout>
+
+                    <!-- Quality Rank -->
+                    <VerticalStackLayout>
+                        <Border
+                WidthRequest="500"
+                HeightRequest="50"
+                Background="White"
+                Stroke="Beige"
+                StrokeThickness="2">
+                            <Label
+                    Text="{Binding SelectedDwarf.QualityRank}"
+                    TextColor="Gold"
+                    Background="Gainsboro"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"/>
+
+                        </Border>
+                        <Label
+                                    Text="{Binding SelectedDwarf.Rank}"
+                                    TextColor="Gold"
+                                    Background="Gainsboro"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+
+                    <!-- Rank -->
+                    <Button 
+                                    Text="Buy Quality Rank"
+                                    Background="Gray"
+                                    TextColor="Gold"
+                                    Clicked="OnQualityRankBoughtClicked"/>
+                    <Button 
+                    Text="Buy Rank"
+                    Background="Gray"
+                    TextColor="Gold"
+                    Clicked="OnTokenRankBoughtClicked"/>
+
+                </StackLayout>
+
+
+            </Border>
+            <Button
+        Text="{Binding SelectedQuantityButtonText}"
+        Command="{Binding ChangeQuantityCommand}"
+        BackgroundColor="Gray"
+        />
+            <ScrollView
+                     Grid.Row="3"
+                    HorizontalOptions="Start"
+                    Padding="55"
+                    >
+                <StackLayout>
+                    <VerticalStackLayout>
+                        <Border
+                                WidthRequest="500"
+                                HeightRequest="50"
+                                Stroke="Black"
+                                StrokeThickness="2"
+                               >
+                            <CollectionView
+                                    ItemsSource="{Binding ShopOre}" SelectionMode="None">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <Border Stroke="Beige" BackgroundColor="SaddleBrown" Padding="10" WidthRequest="10">
-                                            <StackLayout Orientation="Horizontal" Spacing="20">
-                                                <!-- Dwarf Name -->
-                                                <Label Text="{Binding Name}" 
-                           FontSize="20" 
-                           TextColor="Gold" 
-                           VerticalOptions="Center"/>
+                                        <VerticalStackLayout Spacing="25">
+                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding Inventory}" />
+                                            <Label Text="{Binding Price}" />
 
-                                                <!-- Details Button -->
-                                                <Button Text="View"
-                            Command="{Binding BindingContext.SelectDwarfCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                            CommandParameter="{Binding .}"
-                            Background="Gray"
-                            BorderColor="Beige"
-                            WidthRequest="100"/>
-                                            </StackLayout>
-                                        </Border>
+                                         
+                          
+                                            
+                                            <Button
+                                Text="Buy"
+                                Command="{Binding BindingContext.BuyProductCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                CommandParameter="{Binding .}"
+                                BackgroundColor="Green" />
+                                        </VerticalStackLayout>
+                                     
+
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
 
+                        </Border>
 
-
-
-                            <Button
-                                Text="Buy Dwarf"
-                                Clicked="OnBuyDwarfClicked"
-                                Grid.Column="1"
-                                Background="Grey"
-                                IsVisible="True">
-                            </Button>
-                        </StackLayout>
-
-                    </Border>
-
-                </Grid>
-            </Border>
+                    </VerticalStackLayout>
+                </StackLayout>
+            </ScrollView>
         </Grid>
     </VerticalStackLayout>
 </ContentPage>

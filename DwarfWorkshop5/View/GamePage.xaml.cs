@@ -1,17 +1,31 @@
+using DwarfWorkhop5;
 using DwarfWorkshop5.Models;
+
+
+using Microsoft.Maui.Handlers;
+using System.Collections.Generic;
+using DwarfWorkshop5.DesignPattern;
+using CustomButtonHandler = DwarfWorkshop5.DesignPattern.ButtonHandler;
+using DwarfWorkshop5.ViewPageModel;
+
 
 namespace DwarfWorkshop5.View;
 
 public partial class GamePage : ContentPage
 {
     private readonly MyDbContext _mydb;
-    public GamePage(string page, MyDbContext mydb, User user)
+    private readonly Helpers _helpers;
+
+    public GamePage(string page, MyDbContext mydb, User user, Helpers helpers )
     {
         InitializeComponent();
         _mydb = mydb;
+        _helpers = helpers;
         CallInfo(page);
-        BindingContext = new ViewPageModel.GamePageModelViews(_mydb);
+        BindingContext = new GamePageModelViews(_mydb);
 
+        Username.Text = GetSetData.GetCurrentUser().Username;
+        CheckBuyDwarfButton();
 
     }
     private async void CallInfo(string page)
@@ -25,46 +39,6 @@ public partial class GamePage : ContentPage
         {
             //show offline work
         }
-    }
-
-    private void OnDwarfsClicked(object sender, EventArgs e)
-    {
-
-    }
-
-    private void OnInventoryClicked(object sender, EventArgs e)
-    {
-
-    }
-
-    private void OnStoreClicked(object sender, EventArgs e)
-    {
-
-    }
-
-    private void OnDwarf1Clicked(object sender, EventArgs e)
-    {
-
-    }
-
-    private void OnDwarf2Clicked(object sender, EventArgs e)
-    {
-
-    }
-
-    private void OnDwarf3Clicked(object sender, EventArgs e)
-    {
-
-    }
-
-    private void OnDwarf4Clicked(object sender, EventArgs e)
-    {
-
-    }
-
-    private void OnDwarf5Clicked(object sender, EventArgs e)
-    {
-
     }
 
     private void OnJewelryClicked(object sender, EventArgs e)
@@ -89,11 +63,55 @@ public partial class GamePage : ContentPage
 
     private void OnBuyDwarfClicked(object sender, EventArgs e)
     {
+        var handler = new DesignPattern.ButtonHandler(new BuyDwarfShopCommand(_mydb, (GamePageModelViews)BindingContext));
+        handler.OnClick();
+        OnPropertyChanged(nameof(ViewPageModel.GamePageModelViews.Token));
+    }
+    private void CheckBuyDwarfButton()
+    {
+        if(!_helpers.CheckDwarfAvailable().Result)
+        {
+            BuyDwarf.IsVisible = false;
+        }
+    }
+
+   
+
+
+
+    private void OnDwarfSelected(object sender, SelectionChangedEventArgs e)
+    {
 
     }
 
-    private void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private void OnEffifencyRankBoughtClicked(object sender, EventArgs e)
     {
 
+    }
+
+    private void OnTokenRankBoughtClicked(object sender, EventArgs e)
+    {
+
+    }
+
+    private void OnQualityRankBoughtClicked(object sender, EventArgs e)
+    {
+
+    }
+
+    private void OnBuyLvlClicked(object sender, EventArgs e)
+    {
+        var handler = new DesignPattern.ButtonHandler(new BuyUserLvl(_mydb, (GamePageModelViews)BindingContext));
+        handler.OnClick();
+        OnPropertyChanged(nameof(ViewPageModel.GamePageModelViews.Lvl));
+    }
+
+    private void OnSliderValueChanged(object sender, ValueChangedEventArgs e)
+    {
+        var slider = sender as Slider;
+        if (slider != null)
+        {
+            slider.Value = Math.Round(slider.Value);
+        }
     }
 }

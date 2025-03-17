@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+﻿using DwarfWorkshop5.Models;
 using Microsoft.Data.SqlClient;
 
 namespace DwarfWorkhop5
@@ -14,7 +8,7 @@ namespace DwarfWorkhop5
         private readonly MyDbContext _mydb;
 
         public Helpers(MyDbContext dbContext)
-        { 
+        {
             _mydb = dbContext;
         }
         public static async Task<bool> CheckUsername(string username)
@@ -41,9 +35,9 @@ namespace DwarfWorkhop5
         {
             try
             {
-                var  userControll = _mydb.User.Where(p => p.Username == userName && p.Password == password).FirstOrDefault();
+                var userControll = _mydb.User.Where(p => p.Username == userName && p.Password == password).FirstOrDefault();
 
-                if(userControll != null)
+                if (userControll != null)
                 {
                     GetSetData.SetCurrentUser(userControll.Id);
                     return true;
@@ -56,35 +50,48 @@ namespace DwarfWorkhop5
             }
             return false;
         }
-        public static void DwarfAvailable()
+
+        public async Task<bool> CheckDwarfAvailable()
         {
-            using (var mydb = new MyDbContext())
+            var count = _mydb.Dwarfs.Where(p => p.UserId == GetSetData.GetCurrentUser().Id
+                                     && p.Unlocked == false).Count();
+            if (count == 0)
             {
-                var currentUser = GetSetData.GetCurrentUser();
-                var dwarf = mydb.Dwarfs.Where(p => p.UserId == currentUser.Id && p.Unlocked == false).FirstOrDefault();
-
-                dwarf.Unlocked = true;
-
-                mydb.SaveChanges();
-
+                return false;
             }
+            return true;
         }
 
         public void CreateDwarfs()
         {
             for (int i = 0; i < 5; i++)
             {
-                new Dwarfs
+               var newDwarf = new Dwarfs
                 {
                     EffifencyRank = 1,
                     QualityRank = 0,
                     Rank = 1,
                     Unlocked = false,
-                    UserId = GetSetData.GetCurrentUser().Id
+                    UserId = GetSetData.GetCurrentUser().Id,
+                    Name = GetDwarfName().Result
+
 
                 };
-                _mydb.SaveChanges();
+                _mydb.Dwarfs.Add(newDwarf);
             }
+            _mydb.SaveChanges();
+        }
+        public async Task<string> GetDwarfName()
+        {
+            Random rng = new Random();
+            string[] dwarfNames = { "Thorded Smeltbelly", "Erirhan Boulderhand",
+                "Dhonmuki Underjaw", "Yutdrun Merryhand", "Kalmerlun Amberchin", "Dotdrerlun Warjaw",
+                "Luddeath Woldhorn", "Yodmola Bonefury", "Grumrelda Lighthead", "Nenmorra Koboldmaster",
+            "Loddaelin Caskbelly", "Nargrerra Flintbrand", "Jornealyn Bluntmaul"};
+
+            int nameGen = rng.Next(1, dwarfNames.Count());
+            return dwarfNames[nameGen];
+
         }
     }
 }

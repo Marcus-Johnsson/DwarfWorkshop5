@@ -1,3 +1,4 @@
+using DwarfWorkhop5;
 using DwarfWorkshop5.Calculations;
 using DwarfWorkshop5.Models;
 using DwarfWorkshop5.ViewPageModel;
@@ -13,12 +14,14 @@ public partial class LoadingPage : ContentPage
     private readonly MyDbContext _mydb;
     private readonly User _user;
     private WorkProgress _workProgress;
-    public LoadingPage(string page, MyDbContext mydb, User user)
+    private readonly Helpers _helpers;
+    public LoadingPage(string page, MyDbContext mydb, User user, Helpers helpers)
     {
 		InitializeComponent();
         _workProgress = new WorkProgress();
         _mydb = mydb;
         _user = user;
+        _helpers = helpers;
 
         OnStart(page);
 
@@ -29,11 +32,11 @@ public partial class LoadingPage : ContentPage
         await Task.Delay(100);
         if (page == "register")
         {
-            await Navigation.PushAsync(new View.GamePage("register",_mydb,_user));
+            await Navigation.PushAsync(new View.GamePage("register",_mydb,_user, _helpers));
         }
         else
         {
-            await Navigation.PushAsync(new View.GamePage("signin",_mydb,_user));
+            await Navigation.PushAsync(new View.GamePage("signin",_mydb,_user, _helpers));
         }
     }
     protected override void OnAppearing()

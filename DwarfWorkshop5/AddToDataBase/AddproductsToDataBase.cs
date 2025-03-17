@@ -63,7 +63,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         CategoryId = 2,
                         LvlRequirement = 1,
                         TimeEfficiency = 0.05,
-
+                        RecipeId =1
                     },
                     new Products
                     {
@@ -71,7 +71,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         CategoryId = 2,
                         LvlRequirement = 2,
                         TimeEfficiency = 0.10,
-
+                        RecipeId = 2
                     },
                     new Products
                     {
@@ -79,7 +79,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         CategoryId = 2,
                         LvlRequirement = 5,
                         TimeEfficiency = 0.15,
-
+                        RecipeId =3
                     },
                     new Products
                     {
@@ -87,7 +87,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         CategoryId = 2,
                         LvlRequirement = 8,
                         TimeEfficiency = 0.20,
-
+                        RecipeId =4
                     },
                     new Products
                     {
@@ -95,7 +95,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         CategoryId = 2,
                         LvlRequirement = 12,
                         TimeEfficiency = 0.25,
-
+                        RecipeId =5
                     },
                     new Products
                     {
@@ -151,7 +151,8 @@ namespace DwarfWorkshop5.AddToDataBase
                         CategoryId = 4,
                         LvlRequirement = 1,
                         TimeEfficiency = 0.20,
-                        Price = 0
+                        Price = 0,
+                        
                     },
                     new Products
                     {

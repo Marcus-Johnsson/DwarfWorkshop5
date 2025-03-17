@@ -29,8 +29,8 @@ namespace DwarfWorkshop5.AddToDataBase
                 };
                 mydb.Add(user);
                 mydb.SaveChanges();
-                _helpers.CreateDwarfs();
                 LoggInUser(username);
+                _helpers.CreateDwarfs();
                 CreateStartInventory();
 
             }
@@ -61,7 +61,7 @@ namespace DwarfWorkshop5.AddToDataBase
                         Quantity = 20
                     });
                
-                mydb.SaveChanges();
+               
             }
 
 

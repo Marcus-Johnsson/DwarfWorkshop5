@@ -3,35 +3,84 @@ using DwarfWorkshop5.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 
 namespace DwarfWorkshop5.ViewPageModel
 {
-    class GamePageModelViews : INotifyPropertyChanged
+    public class GamePageModelViews : INotifyPropertyChanged
     {
         private readonly MyDbContext _mydb;
-        public ObservableCollection<Products> ShopGems { get; set; }
-        public ObservableCollection<Products> ShopOre { get; set; }
 
-        public ObservableCollection<Inventory> InventoryMaterials { get; set; }
-        public ObservableCollection<Inventory> InventoryFinishedProducts { get; set; }
+        private ObservableCollection<Products> _shopGems = new();
+        public ObservableCollection<Products> ShopGems => _shopGems;
 
-        public ObservableCollection<Dwarfs> UnlockedDwarfs { get; set; }
 
-        public ObservableCollection<User> User { get; set; }
-        public Command<Dwarfs> SelectDwarfCommand { get; }
+        private ObservableCollection<Products> _shopOre = new();
+        public ObservableCollection<Products> ShopOre => _shopOre;
 
-        public GamePageModelViews()
+
+        private ObservableCollection<Dwarfs> _unlockedDwarfs = new();
+        public ObservableCollection<Dwarfs> UnlockedDwarfs 
         {
-            SelectDwarfCommand = new Command<Dwarfs>(SelectDwarf);
-        }
-        private void SelectDwarf(Dwarfs dwarf)
+            get => _unlockedDwarfs;
+             set
+    {
+        if (_unlockedDwarfs != value)
         {
-            if (dwarf != null)
+            _unlockedDwarfs = value;
+            OnPropertyChanged(nameof(UnlockedDwarfs));
+                    
+                }
+    }
+}
+
+
+        private ObservableCollection<Inventory> _inventoryFinishedProducts = new();
+        public ObservableCollection<Inventory> InventoryFinishedProducts => _inventoryFinishedProducts;
+
+        private ObservableCollection<Inventory> _inventoryMaterials = new();
+        public ObservableCollection<Inventory> InventoryMaterials => _inventoryMaterials;
+
+        private User _currentUser;
+        public User CurrentUser
+        {
+            get => _currentUser;
+            set
             {
-                Console.WriteLine($"Dwarf {dwarf.Name} selected!");
+                _currentUser = value;
+                OnPropertyChanged(nameof(CurrentUser));
+                OnPropertyChanged(nameof(Token));
             }
         }
 
+
+
+
+        public ICommand SelectDwarfCommand { get; }
+
+
+        public GamePageModelViews()
+        {
+            SelectDwarfCommand = new Command<Dwarfs>(OnDwarfSelected);
+        }
+        
+       private Dwarfs _selectedDwarf;
+       public Dwarfs SelectedDwarf
+        {
+            get => _selectedDwarf;
+            set
+            {
+                _selectedDwarf = value;
+                OnPropertyChanged(nameof(SelectedDwarf));
+            }
+        }
+
+        private int _token;
+        public int Token
+        {
+            get => _token;
+            set { _token = value; OnPropertyChanged(nameof(Token)); }
+        }
 
         private double _gold;
         public double Gold
@@ -46,25 +95,34 @@ namespace DwarfWorkshop5.ViewPageModel
             get => _lvl;
             set { _lvl = value; OnPropertyChanged(nameof(Lvl)); }
         }
+
+       
         public GamePageModelViews(MyDbContext dbContext)
         {
             _mydb = dbContext;
 
             LoadData();
         }
+        private void OnDwarfSelected(Dwarfs selectedDwarf)
+        {
+            if (selectedDwarf != null)
+            {
+                SelectedDwarf = selectedDwarf;
+            }
+        }
         private async void LoadData()
         {
             var currentUser = GetSetData.GetCurrentUser();
             var shopGemsList = await _mydb.Products.Where(p => p.CategoryId == 3 && p.LvlRequirement <= currentUser.Lvl).ToListAsync();
 
-            ShopGems = new ObservableCollection<Products>(shopGemsList);
+            _shopGems = new ObservableCollection<Products>(shopGemsList);
 
             var shopOreList = await _mydb.Products.Where(p => p.CategoryId == 1 && p.LvlRequirement <= currentUser.Lvl).ToListAsync();
 
-            ShopOre = new ObservableCollection<Products>(shopOreList);
+            _shopOre = new ObservableCollection<Products>(shopOreList);
 
             var dwarfs = _mydb.Dwarfs.Where(p => p.UserId == currentUser.Id && p.Unlocked).ToList();
-            UnlockedDwarfs = new ObservableCollection<Dwarfs>(dwarfs);
+            _unlockedDwarfs = new ObservableCollection<Dwarfs>(dwarfs);
 
              var userInventory = _mydb.Inventory              // material list category 1,2,3 and 4 finished product
                 .Where(inv => currentUser.Id == inv.UserId)
@@ -74,23 +132,29 @@ namespace DwarfWorkshop5.ViewPageModel
                 .Where(r => _mydb.Products
                     .Any(p => p.Id == r.ProductId && p.LvlRequirement <= currentUser.Lvl))
                 .ToList();
-            InventoryMaterials = new ObservableCollection<Inventory>
+            _inventoryMaterials = new ObservableCollection<Inventory>
                                     (userInventory.Where(i => _mydb.Products
                                     .Any(p => p.Id == i.ProductId && (p.CategoryId == 1 | p.CategoryId == 2 | p.CategoryId == 4))));
 
-            InventoryFinishedProducts = new ObservableCollection<Inventory>
+            _inventoryFinishedProducts = new ObservableCollection<Inventory>
                                     (userInventory.Where(i => _mydb.Products
                                     .Any(p => p.Id == i.ProductId && (p.CategoryId == 4))));
 
             Gold = currentUser.Gold;
             Lvl = currentUser.Lvl;
+            Token = currentUser.TokenAmount;
 
 
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
+          
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+            var currentUser = GetSetData.GetCurrentUser();
+            currentUser.LastSave = DateTime.UtcNow;
+            _mydb.SaveChanges();
         }
 
 
