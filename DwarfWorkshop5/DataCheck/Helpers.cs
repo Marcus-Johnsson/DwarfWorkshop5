@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Microsoft.Data.SqlClient;
-using DwarfWorkshop5.Models;
 
 namespace DwarfWorkhop5
 {
