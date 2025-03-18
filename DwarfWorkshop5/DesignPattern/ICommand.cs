@@ -60,7 +60,6 @@ namespace DwarfWorkshop5.DesignPattern
             {
                 currentUser.TokenAmount -= 2;
                 userDwarf.Unlocked = true;
-                _viewModel.UnlockedDwarfs.Add(userDwarf);
                 _viewModel.Token = currentUser.TokenAmount;
                 _mydb.SaveChanges();
                

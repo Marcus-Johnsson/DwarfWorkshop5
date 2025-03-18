@@ -118,4 +118,9 @@ public partial class GamePage : ContentPage
             slider.Value = Math.Round(slider.Value);
         }
     }
+
+    private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+    }
 }
