@@ -1,5 +1,6 @@
 using DwarfWorkhop5;
 using DwarfWorkshop5.AddToDataBase;
+using DwarfWorkshop5.Calculations;
 using DwarfWorkshop5.Models;
 
 
@@ -11,7 +12,8 @@ public partial class Signin : ContentPage
     private readonly MyDbContext _mydb;
     private readonly User _user;
     private readonly RegisterUser _registerUser;
-    public Signin(MyDbContext mydb, User user, RegisterUser registerUser)
+    WorkProgress _workProgress;
+    public Signin(MyDbContext mydb, User user, RegisterUser registerUser, WorkProgress workProgress)
     {
         InitializeComponent();
         _mydb = mydb;
@@ -25,7 +27,7 @@ public partial class Signin : ContentPage
 
         if (await _helpers.SignInUser(SignInUsername.Text, SignInPassword.Text))
         {
-            await Navigation.PushAsync(new LoadingPage("signin", _mydb, _user, _helpers));
+            await Navigation.PushAsync(new LoadingPage("signin", _mydb, _user, _helpers, _workProgress));
         }
         else
         {

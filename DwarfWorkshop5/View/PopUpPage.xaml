@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mlc:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DwarfWorkshop5.View.PopUpPage"
+             xmlns:mlc="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             xmlns:ViewModels="clr-namespace:DwarfWorkshop5.ViewPageModel"
+             x:DataType="ViewModels:GamePageModelViews"
+           CanBeDismissedByTappingOutsideOfPopup="False"
+             >
+
+    <VerticalStackLayout Padding="20" Spacing="10" Background="Wheat">
+        <Picker
+            Title="Select a recipe"
+            ItemsSource="{Binding AvailableRecipe}"
+            ItemDisplayBinding="{Binding Name}"
+            SelectedItem="{Binding PickerProduct}" />
+
+        <Label Text="{Binding PickerProduct.Materials[0].MaterialId}" />
+        <Label Text="{Binding PickerProduct.Materials[0].Quantity}" />
+
+        <Label Text="{Binding PickerProduct.Materials[1]}" />
+        <Label Text="{Binding PickerProduct.Materials[1].Quantity}" />
+        
+         <Button
+            Text="Ok"
+            Clicked="Button_Clicked">
+        
+    </Button>
+    </VerticalStackLayout>
+
+   
+
+</mlc:Popup>

@@ -1,6 +1,7 @@
 using Azure;
 using DwarfWorkhop5;
 using DwarfWorkshop5.AddToDataBase;
+using DwarfWorkshop5.Calculations;
 using DwarfWorkshop5.Models;
 using Microsoft.Data.SqlClient;
 
@@ -12,10 +13,12 @@ public partial class Register : ContentPage
     private readonly MyDbContext _mydb;
     private readonly User _user;
     private readonly Helpers _help;
-    public Register(MyDbContext mydb,User user, RegisterUser registerUser, Helpers helpers)
+    private readonly WorkProgress _workProgress;
+    public Register(MyDbContext mydb,User user, RegisterUser registerUser, Helpers helpers, WorkProgress workProgress)
     {
         InitializeComponent();
         _user = user;
+        _workProgress = workProgress;
         _mydb = mydb;
         _registeruser = registerUser;
         _help = helpers;
@@ -28,12 +31,12 @@ public partial class Register : ContentPage
         string password = PasswordEntryFirst.Text;
         _registeruser.CreateNewUserStep1(username, password);
 
-        await Navigation.PushAsync(new View.LoadingPage("register", _mydb,_user, _help));
+        await Navigation.PushAsync(new View.LoadingPage("register", _mydb,_user, _help, _workProgress));
     }
 
     private async void OnCancelClicked(System.Object sender, System.EventArgs e)
     {
-        await Navigation.PushAsync(new MainPage(_mydb,_user, _registeruser, _help));
+        await Navigation.PushAsync(new MainPage(_mydb,_user, _registeruser, _help, _workProgress));
     }
 
     private async void OnUserNameTextChanged(object sender, TextChangedEventArgs e)

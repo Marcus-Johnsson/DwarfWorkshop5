@@ -7,7 +7,6 @@ namespace DwarfWorkshop5
         public AppShell()
         {
             InitializeComponent();
-            InitializeComponent();
             Routing.RegisterRoute("Game", typeof(GamePage));
             Routing.RegisterRoute("SignIn", typeof(Signin));
             Routing.RegisterRoute("Register", typeof(Register));

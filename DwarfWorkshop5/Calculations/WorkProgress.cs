@@ -4,7 +4,7 @@ using DwarfWorkshop5.Models;
 
 namespace DwarfWorkshop5.Calculations
 {
-    class WorkProgress
+    public class WorkProgress
     {
         private readonly UserSession _session;
 

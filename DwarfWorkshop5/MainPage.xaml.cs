@@ -1,5 +1,6 @@
 ﻿using DwarfWorkhop5;
 using DwarfWorkshop5.AddToDataBase;
+using DwarfWorkshop5.Calculations;
 using DwarfWorkshop5.DataCheck;
 using DwarfWorkshop5.Models;
 using DwarfWorkshop5.View;
@@ -13,10 +14,12 @@ namespace DwarfWorkshop5
         private readonly MyDbContext _mydb;
         private readonly RegisterUser _registerUser;
         private readonly Helpers _helpers;
-        
-        public MainPage(MyDbContext myDb, User user, RegisterUser registerUser, Helpers helpers)
-        {
+        private readonly WorkProgress _workProgress;
 
+
+        public MainPage(MyDbContext myDb, User user, RegisterUser registerUser, Helpers helpers, WorkProgress workProgress)
+        {
+            _workProgress = workProgress;
             InitializeComponent();
             _user = user;
             _mydb = myDb;
@@ -36,12 +39,12 @@ namespace DwarfWorkshop5
         }
         private async void OnLoginClicked(object sender, EventArgs e)
         {
-           await Navigation.PushAsync(new View.Signin(_mydb,_user, _registerUser));
+           await Navigation.PushAsync(new View.Signin(_mydb,_user, _registerUser, _workProgress));
         }
 
         private async void OnRegisterButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new View.Register(_mydb,_user, _registerUser, _helpers));
+            await Navigation.PushAsync(new View.Register(_mydb,_user, _registerUser, _helpers, _workProgress));
         }
     }
 

@@ -77,7 +77,7 @@
                     WidthRequest="75"
                     HorizontalOptions="End">
                     <Label 
-                    Text="{Binding Lvl, StringFormat='     {0} LvL'}"
+                    Text="{Binding Lvl, StringFormat='   {0} LvL '}"
                         HorizontalOptions="Fill" 
                         HorizontalTextAlignment="End"
                         VerticalOptions="End">
@@ -85,6 +85,7 @@
                 </Border>
                 <Button
                      Command="{Binding BuyLvLCommand}"
+                     CommandParameter=""
                      Text="Buy LvL"
                      Background="Gray"
                      BorderColor="Beige"
@@ -643,7 +644,7 @@
        x:Name="Recipie1"
        Text="Change Recipe"
        Command="{Binding ChangeRecipeCommand}"
-       CommandParameter="{Binding SelectedDwarf}"
+       CommandParameter="{Binding SelectedDwarf.SelectedRecipe1}"
        Background="Moccasin"
        BorderColor="Beige"
        Grid.Column="2"
@@ -675,7 +676,7 @@
                     x:Name="Recipie2"
                     Text="Change Recipe"
                     Command="{Binding ChangeRecipeCommand}"
-                    CommandParameter="{Binding SelectedDwarf}"
+                    CommandParameter="{Binding SelectedDwarf.SelectedRecipe2}"
                     Background="Moccasin"
                     BorderColor="Beige"
                     Grid.Column="2"
@@ -708,7 +709,7 @@
                 x:Name="Recipie3"
                 Text="Change Recipe"
                 Command="{Binding ChangeRecipeCommand}"
-                CommandParameter="{Binding SelectedDwarf}"
+                CommandParameter="{Binding SelectedDwarf.SelectedRecipe3}"
                 Background="Moccasin"
                 BorderColor="Beige"
                 Grid.Column="2"

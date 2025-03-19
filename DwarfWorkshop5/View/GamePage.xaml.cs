@@ -9,6 +9,8 @@ using CustomButtonHandler = DwarfWorkshop5.DesignPattern.ButtonHandler;
 using DwarfWorkshop5.ViewPageModel;
 using WinRT.DwarfWorkshop5VtableClasses;
 using DwarfWorkshop5.DataCheck;
+using Microsoft.Identity.Client;
+using DwarfWorkshop5.Calculations;
 
 
 namespace DwarfWorkshop5.View;
@@ -19,24 +21,26 @@ public partial class GamePage : ContentPage
     private readonly Helpers _helpers;
     private readonly UserSession _session;
     private User? _currentUser;
-
+    private readonly WorkProgress _workProgress;
     
        
 
-    public GamePage(string page, MyDbContext mydb, User user, Helpers helpers)
+    public GamePage(string page, MyDbContext mydb, User user, Helpers helpers, WorkProgress workProgress)
     {
         _session = UserSession.GetInstance();
         _currentUser = _session.GetCurrentUser();
-    
+        _workProgress = workProgress;
+
         InitializeComponent();
         _mydb = mydb;
         _helpers = helpers;
-       
+        
         BindingContext = new GamePageModelViews(_mydb);
 
         Username.Text = _currentUser.Username;
         CheckBuyDwarfButton();
         CallInfo(page);
+        StartWorking();
     }     
     private async void CallInfo(string page)
     {
@@ -105,9 +109,7 @@ public partial class GamePage : ContentPage
 
     private void OnBuyLvlClicked(object sender, EventArgs e)
     {
-        var handler = new DesignPattern.ButtonHandler(new BuyUserLvl(_mydb, (GamePageModelViews)BindingContext));
-        handler.OnClick();
-        OnPropertyChanged(nameof(ViewPageModel.GamePageModelViews.Lvl));
+        
     }
 
     private void OnSliderValueChanged(object sender, ValueChangedEventArgs e)
@@ -118,9 +120,14 @@ public partial class GamePage : ContentPage
             slider.Value = Math.Round(slider.Value);
         }
     }
-
-    private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void StartWorking()
     {
+        await RunWork();
+    }
+    private async Task RunWork()
+    {
+        await Task.Delay(1000);
 
+        _workProgress.CalculateWorkProgress(1);
     }
 }

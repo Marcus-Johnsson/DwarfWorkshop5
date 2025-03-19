@@ -15,7 +15,7 @@ public partial class LoadingPage : ContentPage
     private readonly User _user;
     private WorkProgress _workProgress;
     private readonly Helpers _helpers;
-    public LoadingPage(string page, MyDbContext mydb, User user, Helpers helpers)
+    public LoadingPage(string page, MyDbContext mydb, User user, Helpers helpers, WorkProgress workProgress)
     {
 		InitializeComponent();
         _workProgress = new WorkProgress();
@@ -32,11 +32,11 @@ public partial class LoadingPage : ContentPage
         await Task.Delay(100);
         if (page == "register")
         {
-            await Navigation.PushAsync(new View.GamePage("register",_mydb,_user, _helpers));
+            await Navigation.PushAsync(new View.GamePage("register",_mydb,_user, _helpers, _workProgress));
         }
         else
         {
-            await Navigation.PushAsync(new View.GamePage("signin",_mydb,_user, _helpers));
+            await Navigation.PushAsync(new View.GamePage("signin",_mydb,_user, _helpers, _workProgress));
         }
     }
 

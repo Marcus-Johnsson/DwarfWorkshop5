@@ -1,29 +1,46 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.Input;
 using DwarfWorkshop5.DataCheck;
 using DwarfWorkshop5.Models;
+using DwarfWorkshop5.View;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
-using Windows.UI.WebUI;
+using CommunityToolkit.Maui.Views;
 
 namespace DwarfWorkshop5.ViewPageModel
 {
     public partial class GamePageModelViews : INotifyPropertyChanged
     {
+        private User? _currentUser;
+        private readonly UserSession _session;
+        private readonly MyDbContext _mydb;
         public GamePageModelViews(MyDbContext dbContext)
         {
             _mydb = dbContext;
             _session = UserSession.GetInstance();
             LoadData();
             SelectDwarfCommand = new Command<Dwarfs>(OnSelectDwarf);
-            
+            ChangeRecipeCommand = new AsyncRelayCommand<object>(OnChangeRecipe);
+
 
         }
+        public class ProductWithCost
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public double Price { get; set; }
+            public int? RecipeId { get; set; }
+            public List<MaterialCost> Materials { get; set; } = new();
+        }
 
-        private readonly UserSession _session;
-        private User? _currentUser;
-        private readonly MyDbContext _mydb;
+        public class MaterialCost
+        {
+            public int MaterialId { get; set; }
+            public int Quantity { get; set; }
+        }
+
 
         private List<Products> _shopGems = new();
         public List<Products> ShopGems => _shopGems;
@@ -46,8 +63,39 @@ namespace DwarfWorkshop5.ViewPageModel
                 if (unlockedDwarfs != value)
                 {
                     unlockedDwarfs = value;
-                    
+                }
+            }
+        }
+        private List<Inventory> _inventoryFinishedProducts = new();
+        public List<Inventory> InventoryFinishedProducts => _inventoryFinishedProducts;
 
+        private List<Inventory> _inventoryMaterials = new();
+        public List<Inventory> InventoryMaterials => _inventoryMaterials;
+
+        private ProductWithCost _pickerProduct;
+        public ProductWithCost PickerProduct
+        {
+            get { return _pickerProduct; }
+            set
+            {
+                if (_pickerProduct != value)
+                {
+                    _pickerProduct = value;
+                    OnPropertyChanged(nameof(PickerProduct));
+                }
+            }
+        }
+
+        private List<ProductWithCost> _availableRecipe;
+        public List<ProductWithCost> AvailableRecipe
+        {
+            get => _availableRecipe;
+            set
+            {
+                if (_availableRecipe != value)
+                {
+                    _availableRecipe = value;
+                    OnPropertyChanged(nameof(AvailableRecipe));
                 }
             }
         }
@@ -55,10 +103,27 @@ namespace DwarfWorkshop5.ViewPageModel
 
         public ICommand ChangeRecipeCommand { get; }
 
-        public ICommand BuyLvLCommand { get; }
+        private async Task OnChangeRecipe(object recipe)
+        {
+            if (recipe != null)
+            {
+                var availableRecipe = await GetAvailableRecipe(); // Get the list of products with costs
 
+                if (availableRecipe != null)
+                {
+                    _availableRecipe = availableRecipe; 
+                    OnPropertyChanged(nameof(AvailableRecipe));
+                    var popup = new PopUpPage(); // Your PopupPage
+                    popup.BindingContext = this;
+                    await Application.Current.MainPage.ShowPopupAsync(popup);
+                }
+            }
+        }
 
+        private void OnBuyUserLvl()
+        {
 
+        }
         private void OnSelectDwarf(Dwarfs selectedDwarf)
         {
             if (selectedDwarf != null)
@@ -67,14 +132,32 @@ namespace DwarfWorkshop5.ViewPageModel
             }
         }
 
-        private List<Inventory> _inventoryFinishedProducts = new();
-        public List<Inventory> InventoryFinishedProducts => _inventoryFinishedProducts;
+        public async Task<List<ProductWithCost>> GetAvailableRecipe()
+        {
+            var currentUser = _session.GetCurrentUser();
+            var availableRecipes = await _mydb.Products
+                .Where(p => p.LvlRequirement <= currentUser.Lvl && p.RecipeId != null)
+                .Select(p => new ProductWithCost
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price,
+                    RecipeId = p.RecipeId,
+                    Materials = p.RecipeId != null
+                        ? _mydb.Recipes
+                            .Where(r => r.Id == p.RecipeId)
+                            .SelectMany(r => r.MaterialsRequired)
+                            .Select(m => new MaterialCost
+                            {
+                                MaterialId = m.MaterialId,
+                                Quantity = m.Quantity
+                            }).ToList()
+                        : new List<MaterialCost>() // No materials if no recipe
+                })
+                .ToListAsync();
 
-        private List<Inventory> _inventoryMaterials = new();
-        public List<Inventory> InventoryMaterials => _inventoryMaterials;
-
-
-
+            return availableRecipes; // Return the complete list
+        }
         private int _token;
         public int Token
         {
@@ -95,8 +178,6 @@ namespace DwarfWorkshop5.ViewPageModel
             get => _lvl;
             set { _lvl = value; OnPropertyChanged(nameof(Lvl)); }
         }
-        
-
 
         [RelayCommand]
         public async Task BuyDwarf()
@@ -112,6 +193,7 @@ namespace DwarfWorkshop5.ViewPageModel
             {
                 currentUser.TokenAmount -= 2;
                 userDwarf.Unlocked = true;
+                OnPropertyChanged(nameof(Dwarf));
                 Token = currentUser.TokenAmount;
                 _mydb.SaveChanges();
 
@@ -148,6 +230,18 @@ namespace DwarfWorkshop5.ViewPageModel
                 _mydb.SaveChanges();
             }
         }
+        [RelayCommand]
+        private async Task BuyUserLvl()
+        {
+            if (Token >= _currentUser.Lvl * 2)
+            {
+                var currentUser = _mydb.User.Where(p => p.Id == _currentUser.Id).SingleOrDefault();
+                currentUser.Lvl++;
+                currentUser.TokenAmount = -currentUser.Lvl * 2;
+            }
+
+        }
+
 
         private Dwarfs _selectedDwarf;
         public Dwarfs SelectedDwarf
@@ -157,7 +251,6 @@ namespace DwarfWorkshop5.ViewPageModel
             {
                 _selectedDwarf = value;
                 OnPropertyChanged(nameof(SelectedDwarf));
-
                 OnPropertyChanged(nameof(QualityPrice));
                 OnPropertyChanged(nameof(WorkSpeedCost));
                 OnPropertyChanged(nameof(QualityChance));
@@ -165,10 +258,6 @@ namespace DwarfWorkshop5.ViewPageModel
                 OnPropertyChanged(nameof(RankUpgrade));
             }
         }
-
-
-
-
 
         public double QualityChance => SelectedDwarf != null &&
                                SelectedDwarf.QualityRank >= 1
@@ -183,7 +272,7 @@ namespace DwarfWorkshop5.ViewPageModel
         //          Work Speed(1×(1+WorkSpeedIncreaseRate×EffifencyRank)×(1+0.05×Rank))
         public double WorkSpeed => SelectedDwarf != null && SelectedDwarf.EffifencyRank == 1
                            ? Math.Round((1 + WorkSpeedIncreaseRate * SelectedDwarf.EffifencyRank)
-                                        * (1 + 0.05 * SelectedDwarf.Rank), 2)
+                                        * (1 + 0.05 * SelectedDwarf.Rank - 1), 2)
                            : 1;
 
         private const double InitialWorkSpeedCost = 100; // Adjust this base cost if needed
@@ -231,7 +320,9 @@ namespace DwarfWorkshop5.ViewPageModel
             Gold = currentUser.Gold;
             Lvl = currentUser.Lvl;
             Token = currentUser.TokenAmount;
-
+            OnPropertyChanged(nameof(ShopGems));
+            OnPropertyChanged(nameof(ShopOre));
+            OnPropertyChanged(nameof(Dwarf));
 
         }
         public event PropertyChangedEventHandler PropertyChanged;
