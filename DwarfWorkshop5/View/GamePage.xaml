@@ -84,7 +84,7 @@
                     </Label>
                 </Border>
                 <Button
-                     Clicked="OnBuyLvlClicked"
+                     Command="{Binding BuyLvLCommand}"
                      Text="Buy LvL"
                      Background="Gray"
                      BorderColor="Beige"
@@ -285,12 +285,13 @@
                     Spacing="25"
                             WidthRequest="750"
                             HorizontalOptions="Start"
-                           
+                    IsVisible="True"
                             >
                     <StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout" Binding="{Binding SelectedDwarf}" Value="{x:Null}">
                             <Setter Property="IsVisible" Value="False"/>
                         </DataTrigger>
+                        
                         </StackLayout.Triggers>
 
                         <VerticalStackLayout
@@ -605,6 +606,119 @@
                     </VerticalStackLayout>
                 </StackLayout>
             </ScrollView>
+            <StackLayout
+                Grid.Row="3"
+                WidthRequest="400"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                Margin="60"
+              
+                >
+                <StackLayout.Triggers>
+                <DataTrigger TargetType="StackLayout" Binding="{Binding SelectedDwarf}" Value="{x:Null}">
+                    <Setter Property="IsVisible" Value="False"/>
+                </DataTrigger>
+                </StackLayout.Triggers>
+                <Border
+                    WidthRequest="400"
+                    HeightRequest="50"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Background="White"
+
+                    Stroke="Black"
+                    StrokeThickness="2">
+                    <Label   
+                Text="{Binding SelectedDwarf.SelectedRecipe1, StringFormat=' Recipe '}"
+      
+                TextColor="Black"
+                FontSize="Medium"
+                Background="White"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"/>
+                    
+                </Border>
+
+                <Button
+       x:Name="Recipie1"
+       Text="Change Recipe"
+       Command="{Binding ChangeRecipeCommand}"
+       CommandParameter="{Binding SelectedDwarf}"
+       Background="Moccasin"
+       BorderColor="Beige"
+       Grid.Column="2"
+       Grid.Row="3"
+       WidthRequest="200"
+       Margin="15"
+       >
+                </Button>
+                <Border
+                     WidthRequest="400"
+                     HeightRequest="50"
+                     Grid.Row="1"
+                     Grid.Column="0"
+                     Background="White"
+
+                     Stroke="Black"
+                     StrokeThickness="2">
+                    <Label   
+                         Text="{Binding SelectedDwarf.SelectedRecipe2, StringFormat=' Recipe '}"
+                         TextColor="Black"
+                         FontSize="Medium"
+                         Background="White"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Start"/>
+
+                </Border>
+
+                <Button
+                    x:Name="Recipie2"
+                    Text="Change Recipe"
+                    Command="{Binding ChangeRecipeCommand}"
+                    CommandParameter="{Binding SelectedDwarf}"
+                    Background="Moccasin"
+                    BorderColor="Beige"
+                    Grid.Column="2"
+                    Grid.Row="3"
+                    WidthRequest="200"
+                    Margin="15"
+                    >
+                </Button>
+                <Border
+                             WidthRequest="400"
+                             HeightRequest="50"
+                             Grid.Row="1"
+                             Grid.Column="0"
+                             Background="White"
+
+                             Stroke="Black"
+                             StrokeThickness="2">
+                    <Label   
+                         Text="{Binding SelectedDwarf.SelectedRecipe3, StringFormat=' Recipe '}"
+      
+                         TextColor="Black"
+                         FontSize="Medium"
+                         Background="White"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Start"/>
+
+                </Border>
+
+                <Button
+                x:Name="Recipie3"
+                Text="Change Recipe"
+                Command="{Binding ChangeRecipeCommand}"
+                CommandParameter="{Binding SelectedDwarf}"
+                Background="Moccasin"
+                BorderColor="Beige"
+                Grid.Column="2"
+                Grid.Row="3"
+                WidthRequest="200"
+                Margin="15"
+>
+                </Button>
+            </StackLayout>
+
         </Grid>
     </VerticalStackLayout>
 </ContentPage>

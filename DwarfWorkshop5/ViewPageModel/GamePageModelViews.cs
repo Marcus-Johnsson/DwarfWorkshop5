@@ -17,7 +17,7 @@ namespace DwarfWorkshop5.ViewPageModel
             _session = UserSession.GetInstance();
             LoadData();
             SelectDwarfCommand = new Command<Dwarfs>(OnSelectDwarf);
-            ChangeRecipeCommand = new Command<int>(ChangeRecipe);
+            
 
         }
 
@@ -54,6 +54,9 @@ namespace DwarfWorkshop5.ViewPageModel
         public ICommand SelectDwarfCommand { get; }
 
         public ICommand ChangeRecipeCommand { get; }
+
+        public ICommand BuyLvLCommand { get; }
+
 
 
         private void OnSelectDwarf(Dwarfs selectedDwarf)
@@ -92,6 +95,7 @@ namespace DwarfWorkshop5.ViewPageModel
             get => _lvl;
             set { _lvl = value; OnPropertyChanged(nameof(Lvl)); }
         }
+        
 
 
         [RelayCommand]
@@ -167,8 +171,9 @@ namespace DwarfWorkshop5.ViewPageModel
 
 
         public double QualityChance => SelectedDwarf != null &&
-                                       SelectedDwarf.QualityRank >= 1 ? 0.01 + (100 * 0.00025 *
-                                       (1 + 0.05 * SelectedDwarf.QualityRank)) : 0.0;
+                               SelectedDwarf.QualityRank >= 1
+                               ? Math.Round(0.01 + (100 * 0.00025 * (1 + 0.05 * SelectedDwarf.QualityRank)), 2)
+                               : 0.0;
 
         public double QualityPrice => SelectedDwarf != null ? 200 *
                             Math.Pow(1.08, SelectedDwarf.QualityRank) : 200;
@@ -176,42 +181,20 @@ namespace DwarfWorkshop5.ViewPageModel
         public int RankUpgrade => SelectedDwarf != null ? SelectedDwarf.Rank * 2 : 2;
 
         //          Work Speed(1×(1+WorkSpeedIncreaseRate×EffifencyRank)×(1+0.05×Rank))
-        public double WorkSpeed => SelectedDwarf != null ? (1 + WorkSpeedIncreaseRate * SelectedDwarf.EffifencyRank)
-                                    * (1 + 0.05 * SelectedDwarf.Rank) : 1;
+        public double WorkSpeed => SelectedDwarf != null && SelectedDwarf.EffifencyRank == 1
+                           ? Math.Round((1 + WorkSpeedIncreaseRate * SelectedDwarf.EffifencyRank)
+                                        * (1 + 0.05 * SelectedDwarf.Rank), 2)
+                           : 1;
 
         private const double InitialWorkSpeedCost = 100; // Adjust this base cost if needed
 
         private const double WorkSpeedIncreaseRate = 0.05; // Adjust as needed
 
         private const double WorkSpeedCostRate = 0.1; // Adjust as needed
-        public double WorkSpeedCost => SelectedDwarf != null? Math.Round
-                                                (InitialWorkSpeedCost * Math.Pow
-                                                (1 + WorkSpeedCostRate, Math.Max
-                                                (0, SelectedDwarf.EffifencyRank - 1)))
-                                                : InitialWorkSpeedCost;
-        [RelayCommand]
-        private void ChangeRecipe(int slot)
-        {
-            // Open the Picker and let the user select a new recipe
-            var selectedRecipe = OpenRecipePicker();
-
-            if (selectedRecipe != null)
-            {
-                // Assign the selected recipe (ProductId) to the appropriate slot
-                switch (slot)
-                {
-                    case 1:
-                        SelectedDwarf.SelectedRecipe1 = selectedRecipe.ProductId;
-                        break;
-                    case 2:
-                        SelectedDwarf.SelectedRecipe2 = selectedRecipe.ProductId;
-                        break;
-                    case 3:
-                        SelectedDwarf.SelectedRecipe3 = selectedRecipe.ProductId;
-                        break;
-                }
-            }
-        }
+        public double WorkSpeedCost => SelectedDwarf != null
+                               ? Math.Round(InitialWorkSpeedCost * Math.Pow
+                                            (1 + WorkSpeedCostRate, Math.Max(0, SelectedDwarf.EffifencyRank - 1)), 2)
+                               : Math.Round(InitialWorkSpeedCost, 2);
 
 
         public async void LoadData()

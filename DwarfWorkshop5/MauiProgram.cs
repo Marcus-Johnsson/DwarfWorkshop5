@@ -2,6 +2,7 @@
 using DwarfWorkshop5.Models;
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui;
 
 namespace DwarfWorkshop5;
 
@@ -17,7 +18,7 @@ public static class MauiProgram
 		builder
 
 			.UseMauiApp<App>()
-			
+			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -26,6 +27,7 @@ public static class MauiProgram
 		
 			builder.Services.AddSingleton<MyDbContext>();
 			builder.UseMauiApp<App>().UseMauiCommunityToolkitCore();
+			
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

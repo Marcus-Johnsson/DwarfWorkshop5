@@ -39,11 +39,6 @@ public partial class LoadingPage : ContentPage
             await Navigation.PushAsync(new View.GamePage("signin",_mydb,_user, _helpers));
         }
     }
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        StartWorkTimerAsync();
-    }
 
     private void OnStart(string page)
     {
@@ -53,20 +48,5 @@ public partial class LoadingPage : ContentPage
             _workProgress.CalculateWorkProgress(offlineTime);
         }
     }
-    private async void StartWorkTimerAsync()
-    {
-        await Task.Run(async () =>
-            {
-                while (true)
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                        {
-                            _workProgress.CalculateWorkProgress(1);
-                        });
-                    
-                    await Task.Delay(1000);
-                } 
-               
-            });
-    }
+  
 }
