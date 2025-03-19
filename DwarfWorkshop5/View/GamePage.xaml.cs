@@ -36,7 +36,7 @@ public partial class GamePage : ContentPage
 
         Username.Text = _currentUser.Username;
         CheckBuyDwarfButton();
-          CallInfo(page);
+        CallInfo(page);
     }     
     private async void CallInfo(string page)
     {

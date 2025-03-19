@@ -19,10 +19,10 @@ namespace DwarfWorkshop5.AddToDataBase
             {
                 var user = new User()
                 {
-                    Gold = 0,
+                    Gold = 10000,
                     Username = username,
                     Password = password,
-                    TokenAmount = 2,
+                    TokenAmount = 200,
                     TotalSale = 0,
                     LastSave = DateTime.UtcNow,
                     Lvl = 1
@@ -54,8 +54,6 @@ namespace DwarfWorkshop5.AddToDataBase
             User? loggedInUser = session.GetCurrentUser();
             using (var mydb = new MyDbContext())
             {
-           
-
                 mydb.Add(
                     new Inventory
                     {

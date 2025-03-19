@@ -187,68 +187,74 @@
 
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="25" VerticalOptions="Center">
                     <Button
+                        
                         x:Name="Dwarf1"
+                        Text="{Binding Dwarf[0].Name}"
                         Command="{Binding SelectDwarfCommand}"
-                        Text="{Binding Dwarfs[0].Name}"
+                        CommandParameter="{Binding Dwarf[0]}"
                         Background="Gray"
                         BorderColor="Beige"
                         Grid.Column="2"
                         Grid.Row="1"
                         WidthRequest="200"
                         Margin="15"
-                        IsVisible="{Binding Dwarfs[0].Unlocked}">
+                        IsVisible="{Binding Dwarf[0].Unlocked}">
                     </Button>
                     <Button
                         x:Name="Dwarf2"
+                        Text="{Binding Dwarf[1].Name}"
                         Command="{Binding SelectDwarfCommand}"
-                        Text="{Binding Dwarfs[1].Name}"
+                        CommandParameter="{Binding Dwarf[1]}"
                         Background="Gray"
                         BorderColor="Beige"
                         Grid.Column="2"
                         Grid.Row="1"
                         WidthRequest="200"
                         Margin="15"
-                        IsVisible="{Binding Dwarfs[1].Unlocked}">
+                        IsVisible="{Binding Dwarf[1].Unlocked}">
                     </Button>
                     <Button
                         x:Name="Dwarf3"
+                        Text="{Binding Dwarf[2].Name}"
                         Command="{Binding SelectDwarfCommand}"
-                        Text="{Binding Dwarfs[2].Name}"
+                        CommandParameter="{Binding Dwarf[2]}"
                         Background="Gray"
                         BorderColor="Beige"
                         Grid.Column="2"
                         Grid.Row="1"
                         WidthRequest="200"
                         Margin="15"
-                        IsVisible="{Binding Dwarfs[2].Unlocked}">
+                        IsVisible="{Binding Dwarf[2].Unlocked}">
                     </Button>
                     <Button
                         x:Name="Dwarf4"
+                        Text="{Binding Dwarf[3].Name}"
                         Command="{Binding SelectDwarfCommand}"
-                        Text="{Binding Dwarfs[3].Name}"
+                        CommandParameter="{Binding Dwarf[3]}"
                         Background="Gray"
                         BorderColor="Beige"
                         Grid.Column="2"
                         Grid.Row="1"
                         WidthRequest="200"
                         Margin="15"
-                        IsVisible="{Binding Dwarfs[3].Unlocked}">
+                        IsVisible="{Binding Dwarf[3].Unlocked}">
                     </Button>
                     <Button
                         x:Name="Dwarf5"
+                        Text="{Binding Dwarf[4].Name}"
                         Command="{Binding SelectDwarfCommand}"
-                        Text="{Binding Dwarfs[4].Name}"
+                        CommandParameter="{Binding Dwarf[4]}"
                         Background="Gray"
                         BorderColor="Beige"
                         Grid.Column="2"
                         Grid.Row="1"
                         WidthRequest="200"
                         Margin="15"
-                        IsVisible="{Binding Dwarfs[4].Unlocked}">
+                        IsVisible="{Binding Dwarf[4].Unlocked}">
                     </Button>
                     <Button
                           x:Name="BuyDwarf"
-                          Command="{Binding BuyDwarfCommandCommand}"
+                          Command="{Binding BuyDwarfCommand}"
                           Text="Buy Dwarf"
                           Background="Gray"
                           BorderColor="Beige"
@@ -294,12 +300,16 @@
                                 WidthRequest="400"
                                 HeightRequest="50"
                                 Stroke="Black"
-                                StrokeThickness="4">
+                                StrokeThickness="4"
+                                >
                             <Label
-                                    Text="{Binding SelectedDwarf.Name, StringFormat='{0} Dwarf Name'}"
-                                        
-                                           TextColor="Gold"
-                                           Background="Salmon"
+                                Padding="10"
+                                FontSize="18"
+                                Text="{Binding SelectedDwarf.Name}"
+                                TextColor="Gold"
+                                Background="Salmon"
+                                
+                                
                                           >
                             </Label>
                         </Border>
@@ -312,12 +322,11 @@
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 Background="White"
-                                
                                 Stroke="Black"
                                 StrokeThickness="2">
                             <!-- Effifency Rank -->
                             <Label   
-                                     Text="{Binding SelectedDwarf.EffifencyRank, StringFormat='     Effifency {0}'}"
+                                     Text="{Binding SelectedDwarf.EffifencyRank, StringFormat=' Effifency {0}'}"
                               
                                     TextColor="Black"
                                     FontSize="Medium"
@@ -337,7 +346,7 @@
     StrokeThickness="2">
                             <!-- Effifency Rank -->
                             <Label   
-        Text="{Binding WorkSpeed, StringFormat='     WorkSpeed {0}'}"
+        Text="{Binding WorkSpeed, StringFormat='  WorkSpeed {0}'}"
       
         TextColor="Black"
         FontSize="Medium"
@@ -357,7 +366,7 @@
                             StrokeThickness="2">
                             <!-- Effifency Rank -->
                             <Label   
-                                Text="{Binding WorkSpeedCost, StringFormat='     Price {0}'}"
+                                Text="{Binding WorkSpeedCost, StringFormat=' Price {0}'}"
       
                                 TextColor="Black"
                                 FontSize="Medium"
@@ -390,7 +399,7 @@
                                 StrokeThickness="2">
                             <!-- Effifency Rank -->
                             <Label   
-                                   Text="{Binding SelectedDwarf.QualityRank, StringFormat='     Quality {0}'}"
+                                   Text="{Binding SelectedDwarf.QualityRank, StringFormat=' Quality {0}'}"
                               
                                     TextColor="Black"
                                     FontSize="Medium"
@@ -410,7 +419,7 @@
           StrokeThickness="2">
                             <!-- Effifency Rank -->
                             <Label   
-             Text="{Binding QualityChance, StringFormat='     Quality {0}'}"
+             Text="{Binding QualityChance, StringFormat='  Quality {0} %'}"
         
               TextColor="Black"
               FontSize="Medium"
@@ -430,7 +439,7 @@
                             StrokeThickness="2">
                             <!-- Effifency Rank -->
                             <Label   
-                                Text="{Binding QualityPrice, StringFormat='     Price {0}'}"
+                                Text="{Binding QualityPrice, StringFormat=' Price {0}'}"
       
                                 TextColor="Black"
                                 FontSize="Medium"
@@ -450,7 +459,7 @@
 
                     </HorizontalStackLayout>
                     <HorizontalStackLayout
-              Spacing="25">
+                        Spacing="25">
                         <Border
                       WidthRequest="150"
                       HeightRequest="50"
@@ -460,9 +469,8 @@
                       
                       Stroke="Black"
                       StrokeThickness="2">
-                            <!-- Effifency Rank -->
                             <Label   
-                         Text="{Binding SelectedDwarf.QualityRank, StringFormat='     Quality {0}'}"
+                         Text="{Binding SelectedDwarf.Rank, StringFormat=' Rank {0}'}"
                     
                           TextColor="Black"
                           FontSize="Medium"
@@ -472,37 +480,19 @@
 
                         </Border>
                         <Border
-WidthRequest="200"
-HeightRequest="50"
-Grid.Row="1"
-Grid.Column="0"
-Background="White"
+                            WidthRequest="150"
+                            HeightRequest="50"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Background="White"
 
-Stroke="Black"
-StrokeThickness="2">
-                            <!-- Effifency Rank -->
-                            <Label   
-   Text="{Binding SelectedDwarf.Rank, StringFormat='     Rank {0}'}"
-        
-    TextColor="Black"
-    FontSize="Medium"
-    Background="White"
-    VerticalOptions="Center"
-    HorizontalOptions="Start"/>
-
-                        </Border>
-                        <Border
-                  WidthRequest="150"
-                  HeightRequest="50"
-                  Grid.Row="1"
-                  Grid.Column="0"
-                  Background="White"
-        
-                  Stroke="Black"
-                  StrokeThickness="2">
+                            Stroke="Black"
+                            StrokeThickness="2">
+                            
+                       
                      
                             <Label   
-                      Text="{Binding RankUpgrade, StringFormat='     Price {0}'}"
+                      Text="{Binding RankUpgrade, StringFormat=' Tokens {0}'}"
       
                       TextColor="Black"
                       FontSize="Medium"
@@ -512,21 +502,16 @@ StrokeThickness="2">
 
                         </Border>
 
-
-                        <Button 
+<Button 
                   Text="Upgrade"
                   Background="Gray"
                   TextColor="Gold"
                   HorizontalOptions="End"
                   Clicked="OnEffifencyRankBoughtClicked"></Button>
+                        
 
                     </HorizontalStackLayout>
 
-                    <Button 
-                    Text="Buy Rank"
-                    Background="Gray"
-                    TextColor="Gold"
-                    Clicked="OnTokenRankBoughtClicked"/>
                             
 
                 </StackLayout>

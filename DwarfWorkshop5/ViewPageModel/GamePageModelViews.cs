@@ -1,21 +1,28 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using DwarfWorkhop5;
 using DwarfWorkshop5.DataCheck;
 using DwarfWorkshop5.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
+using Windows.UI.WebUI;
 
 namespace DwarfWorkshop5.ViewPageModel
 {
     public partial class GamePageModelViews : INotifyPropertyChanged
     {
+        public GamePageModelViews(MyDbContext dbContext)
+        {
+            _mydb = dbContext;
+            _session = UserSession.GetInstance();
+            LoadData();
+            SelectDwarfCommand = new Command<Dwarfs>(OnSelectDwarf);
+            ChangeRecipeCommand = new Command<int>(ChangeRecipe);
+
+        }
+
         private readonly UserSession _session;
         private User? _currentUser;
-
-        
-        
         private readonly MyDbContext _mydb;
 
         private List<Products> _shopGems = new();
@@ -25,13 +32,12 @@ namespace DwarfWorkshop5.ViewPageModel
         private List<Products> _shopOre = new();
         public List<Products> ShopOre => _shopOre;
 
-
-        public List<Dwarfs> Dwarf { get; private set; }
+        public ObservableCollection<Dwarfs> Dwarf { get; private set; } = new ObservableCollection<Dwarfs>();
 
         Dwarfs unlockedDwarfs;
-        public Dwarfs UnlockedDwarfs 
+        public Dwarfs UnlockedDwarfs
         {
-            get 
+            get
             {
                 return unlockedDwarfs;
             }
@@ -40,10 +46,23 @@ namespace DwarfWorkshop5.ViewPageModel
                 if (unlockedDwarfs != value)
                 {
                     unlockedDwarfs = value;
+                    
+
                 }
             }
         }
-       
+        public ICommand SelectDwarfCommand { get; }
+
+        public ICommand ChangeRecipeCommand { get; }
+
+
+        private void OnSelectDwarf(Dwarfs selectedDwarf)
+        {
+            if (selectedDwarf != null)
+            {
+                SelectedDwarf = selectedDwarf;
+            }
+        }
 
         private List<Inventory> _inventoryFinishedProducts = new();
         public List<Inventory> InventoryFinishedProducts => _inventoryFinishedProducts;
@@ -51,7 +70,7 @@ namespace DwarfWorkshop5.ViewPageModel
         private List<Inventory> _inventoryMaterials = new();
         public List<Inventory> InventoryMaterials => _inventoryMaterials;
 
-        public ICommand SelectDwarfCommand { get; }
+
 
         private int _token;
         public int Token
@@ -76,11 +95,11 @@ namespace DwarfWorkshop5.ViewPageModel
 
 
         [RelayCommand]
-        public async Task BuyDwarfCommand()
+        public async Task BuyDwarf()
         {
-            var currentUser = _mydb.User.Where(p=>p.Id == _session.GetCurrentUser().Id).SingleOrDefault();
+            var currentUser = _mydb.User.Where(p => p.Id == _session.GetCurrentUser().Id).SingleOrDefault();
             var userDwarf = _mydb.Dwarfs.FirstOrDefault(p => p.UserId == currentUser.Id && p.Unlocked == false);
-            
+
             if (userDwarf == null || currentUser == null || currentUser.TokenAmount < 2)
             {
 
@@ -96,7 +115,7 @@ namespace DwarfWorkshop5.ViewPageModel
         }
 
         [RelayCommand]
-        private async Task BuyCommand(Products products)
+        private async Task BuyProduct(Products products)
         {
             if (products == null)
             {
@@ -142,47 +161,59 @@ namespace DwarfWorkshop5.ViewPageModel
                 OnPropertyChanged(nameof(RankUpgrade));
             }
         }
-        
 
-   
 
-        
+
+
+
         public double QualityChance => SelectedDwarf != null &&
-                                       SelectedDwarf.QualityRank >= 1? 0.01 + (100 * 0.00025 * 
-                                       (1 + 0.05 * SelectedDwarf.QualityRank)): 0.0;
+                                       SelectedDwarf.QualityRank >= 1 ? 0.01 + (100 * 0.00025 *
+                                       (1 + 0.05 * SelectedDwarf.QualityRank)) : 0.0;
 
-        public double QualityPrice => SelectedDwarf != null ? 200 * 
+        public double QualityPrice => SelectedDwarf != null ? 200 *
                             Math.Pow(1.08, SelectedDwarf.QualityRank) : 200;
 
-        public int RankUpgrade => SelectedDwarf != null ?  SelectedDwarf.Rank * 2 : 2;
+        public int RankUpgrade => SelectedDwarf != null ? SelectedDwarf.Rank * 2 : 2;
 
         //          Work Speed(1×(1+WorkSpeedIncreaseRate×EffifencyRank)×(1+0.05×Rank))
-        public double WorkSpeed => SelectedDwarf != null ? (1 + WorkSpeedIncreaseRate * SelectedDwarf.EffifencyRank) * (1 + 0.05 * SelectedDwarf.Rank) : 1;
+        public double WorkSpeed => SelectedDwarf != null ? (1 + WorkSpeedIncreaseRate * SelectedDwarf.EffifencyRank)
+                                    * (1 + 0.05 * SelectedDwarf.Rank) : 1;
 
         private const double InitialWorkSpeedCost = 100; // Adjust this base cost if needed
+
         private const double WorkSpeedIncreaseRate = 0.05; // Adjust as needed
 
-
         private const double WorkSpeedCostRate = 0.1; // Adjust as needed
-        public double WorkSpeedCost => SelectedDwarf != null ? InitialWorkSpeedCost
-                                    * Math.Pow(1 + WorkSpeedCostRate, SelectedDwarf.EffifencyRank)
-                                    : InitialWorkSpeedCost;
-
-
-        public GamePageModelViews(MyDbContext dbContext)
+        public double WorkSpeedCost => SelectedDwarf != null? Math.Round
+                                                (InitialWorkSpeedCost * Math.Pow
+                                                (1 + WorkSpeedCostRate, Math.Max
+                                                (0, SelectedDwarf.EffifencyRank - 1)))
+                                                : InitialWorkSpeedCost;
+        [RelayCommand]
+        private void ChangeRecipe(int slot)
         {
-            _mydb = dbContext;
-            _session = UserSession.GetInstance();
-            LoadData();
-            
+            // Open the Picker and let the user select a new recipe
+            var selectedRecipe = OpenRecipePicker();
+
+            if (selectedRecipe != null)
+            {
+                // Assign the selected recipe (ProductId) to the appropriate slot
+                switch (slot)
+                {
+                    case 1:
+                        SelectedDwarf.SelectedRecipe1 = selectedRecipe.ProductId;
+                        break;
+                    case 2:
+                        SelectedDwarf.SelectedRecipe2 = selectedRecipe.ProductId;
+                        break;
+                    case 3:
+                        SelectedDwarf.SelectedRecipe3 = selectedRecipe.ProductId;
+                        break;
+                }
+            }
         }
-        //private void OnDwarfSelected(Dwarfs selectedDwarf)
-        //{
-        //    if (selectedDwarf != null)
-        //    {
-        //        SelectedDwarf = selectedDwarf;
-        //    }
-        //}
+
+
         public async void LoadData()
         {
             var currentUser = _session.GetCurrentUser();
@@ -196,11 +227,11 @@ namespace DwarfWorkshop5.ViewPageModel
             _shopOre = new List<Products>(shopOreList);
 
             var dwarfs = _mydb.Dwarfs.Where(p => p.UserId == currentUser.Id).ToList();
-            Dwarf = new List<Dwarfs>(dwarfs);
+            Dwarf = new ObservableCollection<Dwarfs>(dwarfs);
 
-             var userInventory = _mydb.Inventory              // material list category 1,2,3 and 4 finished product
-                .Where(inv => currentUser.Id == inv.UserId)
-                .ToList();
+            var userInventory = _mydb.Inventory              // material list category 1,2,3 and 4 finished product
+               .Where(inv => currentUser.Id == inv.UserId)
+               .ToList();
 
             var recipeAvailable = _mydb.Recipes
                 .Where(r => _mydb.Products
