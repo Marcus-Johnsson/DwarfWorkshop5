@@ -586,7 +586,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 5,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 1,
                             Quantity = 4
@@ -599,7 +599,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 6,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                                 MaterialId = 2,
                                 Quantity = 4
@@ -614,7 +614,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 7,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 3,
@@ -628,7 +628,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 8,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 4,
@@ -642,7 +642,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 9,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 5,
@@ -656,7 +656,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 10,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 6,
@@ -670,7 +670,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 15,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 6,
                             Quantity = 2
@@ -683,7 +683,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 13,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 6,
@@ -697,7 +697,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 25,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 7,
@@ -711,7 +711,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 20,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 7,
@@ -725,7 +725,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 15,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 6,
@@ -739,7 +739,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 20,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 6,
@@ -753,7 +753,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 30,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 7,
@@ -767,13 +767,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 120,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 6,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 11,
                             Quantity = 1
@@ -786,13 +786,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 240,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 7,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 11,
                             Quantity = 1
@@ -805,7 +805,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 25,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 7,
@@ -819,7 +819,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 80,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 8,
@@ -833,7 +833,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 95,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 8,
@@ -847,7 +847,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 35,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 7,
@@ -861,13 +861,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 350,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 7,
                             Quantity = 4
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 12,
                             Quantity = 12
@@ -880,13 +880,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 600,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 8,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 11,
                             Quantity = 1
@@ -899,7 +899,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 120,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 8,
@@ -913,7 +913,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 1000,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 9,
@@ -927,7 +927,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 200,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 8,
@@ -941,13 +941,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 380,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 7,
                             Quantity = 1
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 12,
                             Quantity = 1
@@ -960,13 +960,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 2200,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 9,
                             Quantity = 4
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 12,
                             Quantity = 1
@@ -979,13 +979,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 3800,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 8,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 13,
                             Quantity = 2
@@ -997,8 +997,8 @@ namespace DwarfWorkshop5.AddToDataBase
                     ProductId = 39,
                     WorkTime = 1000,
                     MaterialsRequired =
-                    {
-                        new Recipe.MaterialRequirement
+                    {   
+                        new MaterialRequirement
                         {
 
                             MaterialId = 9,
@@ -1012,13 +1012,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 3000,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 8,
                             Quantity = 3
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 13,
                             Quantity = 1
@@ -1031,13 +1031,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 5500,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 9,
                             Quantity = 1
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 13,
                             Quantity = 2
@@ -1050,13 +1050,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 3800,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 9,
                             Quantity = 1
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 12,
                             Quantity = 2
@@ -1069,13 +1069,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 4000,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 7,
                             Quantity = 4
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 14,
                             Quantity = 1
@@ -1088,13 +1088,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 5800,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 8,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 8,
                             Quantity = 1
@@ -1107,13 +1107,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 1800,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 6,
                             Quantity = 20
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 12,
                             Quantity = 3
@@ -1126,13 +1126,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 2200,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 8,
                             Quantity = 1
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 11,
                             Quantity = 2
@@ -1145,13 +1145,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 5400,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 9,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 13,
                             Quantity = 1
@@ -1164,7 +1164,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 3000,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 10,
@@ -1178,13 +1178,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 4200,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 10,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 11,
                             Quantity = 3
@@ -1197,7 +1197,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 3800,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 10,
@@ -1211,13 +1211,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 6000,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 10,
                             Quantity =2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 10,
                             Quantity = 2
@@ -1230,13 +1230,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 6500,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 8,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 15,
                             Quantity = 1
@@ -1249,13 +1249,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 5000,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 7,
                             Quantity = 1
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 15,
                             Quantity = 2
@@ -1268,13 +1268,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 8000,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 9,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 15,
                             Quantity = 1
@@ -1287,7 +1287,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 4500,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 10,
@@ -1301,13 +1301,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 7000,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 10,
                             Quantity = 4
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 11,
                             Quantity = 4
@@ -1320,7 +1320,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 4900,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 10,
@@ -1334,13 +1334,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 9200,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 9,
                             Quantity = 4
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 15,
                             Quantity = 2
@@ -1353,13 +1353,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 7500,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 10,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 12,
                             Quantity = 2
@@ -1372,13 +1372,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 8500,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 10,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 13,
                             Quantity = 2
@@ -1391,13 +1391,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 6250,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 8,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 14,
                             Quantity = 1
@@ -1410,14 +1410,14 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 4900,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 8,
                             Quantity = 4
                         },
-                        new Recipe.MaterialRequirement
-                        {
+                        new MaterialRequirement
+                        {   
                             MaterialId = 13,
                             Quantity = 3
                         }
@@ -1429,13 +1429,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 12000,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 9,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 15,
                             Quantity = 1
@@ -1448,13 +1448,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 16000,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 10,
                             Quantity = 4
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 15,
                             Quantity = 1
@@ -1467,13 +1467,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 10000,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 9,
                             Quantity = 1
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 14,
                             Quantity = 1
@@ -1486,13 +1486,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 18000,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 10,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 15,
                             Quantity = 2
@@ -1505,13 +1505,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 12000,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 10,
                             Quantity = 4
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 14,
                             Quantity = 3
@@ -1524,13 +1524,13 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 8000,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 10,
                             Quantity = 2
                         },
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
                             MaterialId = 13,
                             Quantity = 4
@@ -1543,7 +1543,7 @@ namespace DwarfWorkshop5.AddToDataBase
                     WorkTime = 2678400,
                     MaterialsRequired =
                     {
-                        new Recipe.MaterialRequirement
+                        new MaterialRequirement
                         {
 
                             MaterialId = 10,

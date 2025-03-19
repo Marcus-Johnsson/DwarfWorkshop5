@@ -1,18 +1,14 @@
-﻿using CommunityToolkit.Maui.Views;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using DwarfWorkshop5.DataCheck;
 using DwarfWorkshop5.Models;
-using DwarfWorkshop5.View;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
-using CommunityToolkit.Maui.Views;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace DwarfWorkshop5.ViewPageModel
 {
-    public partial class GamePageModelViews : INotifyPropertyChanged 
+    public partial class GamePageModelViews : INotifyPropertyChanged
     {
         private User? _currentUser;
         private readonly UserSession _session;
@@ -22,25 +18,27 @@ namespace DwarfWorkshop5.ViewPageModel
             _mydb = dbContext;
             _session = UserSession.GetInstance();
             LoadData();
-            SelectDwarfCommand = new Command<Dwarfs>(OnSelectDwarf);
-            ChangeRecipeCommand = new AsyncRelayCommand<object>(OnChangeRecipe);
+            SelectDwarfCommand =  new Command<Dwarfs>(OnSelectDwarf);
+            PickRecipeSlotCommand = new AsyncRelayCommand<int>(PickRecipeSlot);
+            ChangeRecipeCommand = new AsyncRelayCommand<int>(ChangeRecipe);
 
 
         }
         public class ProductWithCost
         {
             public int Id { get; set; }
-            public string Name { get; set; }
-            public double Price { get; set; }
+            public string? Name { get; set; }
             public int? RecipeId { get; set; }
             public List<MaterialCost> Materials { get; set; } = new();
-        }
+        } // Recipe Display
 
         public class MaterialCost
         {
+            public string? MaterialName { get; set; }
             public int MaterialId { get; set; }
             public int Quantity { get; set; }
-        }
+        }   // Recipe Display
+
 
 
         private List<Products> _shopGems = new();
@@ -73,6 +71,7 @@ namespace DwarfWorkshop5.ViewPageModel
         private List<Inventory> _inventoryMaterials = new();
         public List<Inventory> InventoryMaterials => _inventoryMaterials;
 
+
         private ProductWithCost _pickerProduct;
         public ProductWithCost PickerProduct
         {
@@ -86,7 +85,19 @@ namespace DwarfWorkshop5.ViewPageModel
                 }
             }
         }
-
+        private int _selectedSlotIndex;
+        public int SelectedSlotIndex
+        {
+            get => _selectedSlotIndex;
+            set
+            {
+                if (_selectedSlotIndex != value)
+                {
+                    _selectedSlotIndex = value;
+                    OnPropertyChanged(nameof(SelectedSlotIndex));
+                }
+            }
+        }
         private List<ProductWithCost> _availableRecipe;
         public List<ProductWithCost> AvailableRecipe
         {
@@ -104,19 +115,28 @@ namespace DwarfWorkshop5.ViewPageModel
 
         public ICommand ChangeRecipeCommand { get; }
 
-        private async Task OnChangeRecipe(object recipe)
+        public ICommand PickRecipeSlotCommand { get; }
+
+
+        private async Task ChangeRecipe(int productId)
         {
-            if (recipe != null)
+            _selectedSlotIndex = productId;
+            OnPropertyChanged(nameof(Dwarf));
+            await Task.Delay(100);
+        }
+        private async Task PickRecipeSlot(int slot)
+        {
+
+            _selectedSlotIndex = slot;
+
+            var availableRecipe = await GetAvailableRecipe(); // Get the list of products with costs
+
+            if (availableRecipe != null)
             {
-                var availableRecipe = await GetAvailableRecipe(); // Get the list of products with costs
-
-                if (availableRecipe != null)
-                {
-                    _availableRecipe = availableRecipe; 
-                    OnPropertyChanged(nameof(AvailableRecipe));
-
-                }
+                _availableRecipe = availableRecipe;
+                OnPropertyChanged(nameof(AvailableRecipe));
             }
+
         }
 
         private void OnBuyUserLvl()
@@ -134,28 +154,52 @@ namespace DwarfWorkshop5.ViewPageModel
         public async Task<List<ProductWithCost>> GetAvailableRecipe()
         {
             var currentUser = _session.GetCurrentUser();
-            var availableRecipes = await _mydb.Products
-                .Where(p => p.LvlRequirement <= currentUser.Lvl && p.RecipeId != null)
-                .Select(p => new ProductWithCost
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Price = p.Price,
-                    RecipeId = p.RecipeId,
-                    Materials = p.RecipeId != null
-                        ? _mydb.Recipes
-                            .Where(r => r.Id == p.RecipeId)
-                            .SelectMany(r => r.MaterialsRequired)
-                            .Select(m => new MaterialCost
-                            {
-                                MaterialId = m.MaterialId,
-                                Quantity = m.Quantity
-                            }).ToList()
-                        : new List<MaterialCost>() // No materials if no recipe
-                })
+
+            var allProductIds = await _mydb.Products
+                .Where(p => p.LvlRequirement <= currentUser.Lvl)
                 .ToListAsync();
 
-            return availableRecipes; // Return the complete list
+            var recipes = await _mydb.Recipes
+                .Where(r => allProductIds.Select(p => p.Id).Contains(r.ProductId))
+                .Include(r => r.MaterialsRequired)
+                .ToListAsync();
+
+            var materialIds = recipes
+                .SelectMany(r => r.MaterialsRequired)
+                .Select(m => m.MaterialId)
+                .Distinct()
+                .ToList();
+
+            var materials = await _mydb.Products
+                .Where(p => materialIds.Contains(p.Id))
+                .Select(p => new { p.Id, p.Name })
+                .ToListAsync();
+
+            var productWithCosts = allProductIds
+                .Where(p => p.RecipeId != null)
+                .Select(p =>
+                {
+                    var recipe = recipes.FirstOrDefault(r => r.ProductId == p.Id);
+
+                    var materialCosts = recipe?.MaterialsRequired
+                        .Select(m => new MaterialCost
+                        {
+                            MaterialName = materials.FirstOrDefault(mat => mat.Id == m.MaterialId)?.Name,
+                            MaterialId = m.MaterialId,
+                            Quantity = m.Quantity
+                        })
+                        .ToList() ?? new List<MaterialCost>();
+
+                    return new ProductWithCost
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        RecipeId = p.RecipeId,
+                        Materials = materialCosts
+                    };
+                })
+                .ToList();
+            return productWithCosts;
         }
         private int _token;
         public int Token
@@ -197,6 +241,8 @@ namespace DwarfWorkshop5.ViewPageModel
                 _mydb.SaveChanges();
 
             }
+            await Task.Delay(100);
+
         }
 
         [RelayCommand]
@@ -227,6 +273,8 @@ namespace DwarfWorkshop5.ViewPageModel
                     inventory.Quantity++;
                 }
                 _mydb.SaveChanges();
+                await Task.Delay(100);
+
             }
         }
         [RelayCommand]
@@ -238,6 +286,7 @@ namespace DwarfWorkshop5.ViewPageModel
                 currentUser.Lvl++;
                 currentUser.TokenAmount = -currentUser.Lvl * 2;
             }
+            await Task.Delay(100);
 
         }
 

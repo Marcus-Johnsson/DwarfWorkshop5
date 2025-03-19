@@ -126,8 +126,10 @@ public partial class GamePage : ContentPage
     }
     private async Task RunWork()
     {
-        await Task.Delay(1000);
+        while (true) { 
 
         _workProgress.CalculateWorkProgress(1);
+        await Task.Delay(1000);
+        }
     }
 }

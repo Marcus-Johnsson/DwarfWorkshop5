@@ -32,7 +32,8 @@
                         BackgroundColor="Transparent"
                         TextColor="Gold"
                         BorderColor="Gold"
-                        BorderWidth="1">
+                        BorderWidth="1"
+                        IsEnabled="False">
 
 
                 </Button>

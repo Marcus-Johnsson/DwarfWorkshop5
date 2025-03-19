@@ -120,7 +120,7 @@ namespace DwarfWorkshop5.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("DwarfWorkshop5.Models.Recipe", b =>
+            modelBuilder.Entity("DwarfWorkshop5.Models. ", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -139,7 +139,7 @@ namespace DwarfWorkshop5.Migrations
                     b.ToTable("Recipes");
                 });
 
-            modelBuilder.Entity("DwarfWorkshop5.Models.Recipe+MaterialRequirement", b =>
+            modelBuilder.Entity("DwarfWorkshop5.Models. +MaterialRequirement", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -249,14 +249,14 @@ namespace DwarfWorkshop5.Migrations
                     b.ToTable("WorkOrder");
                 });
 
-            modelBuilder.Entity("DwarfWorkshop5.Models.Recipe+MaterialRequirement", b =>
+            modelBuilder.Entity("DwarfWorkshop5.Models. +MaterialRequirement", b =>
                 {
-                    b.HasOne("DwarfWorkshop5.Models.Recipe", null)
+                    b.HasOne("DwarfWorkshop5.Models. ", null)
                         .WithMany("MaterialsRequired")
                         .HasForeignKey("RecipeId");
                 });
 
-            modelBuilder.Entity("DwarfWorkshop5.Models.Recipe", b =>
+            modelBuilder.Entity("DwarfWorkshop5.Models. ", b =>
                 {
                     b.Navigation("MaterialsRequired");
                 });

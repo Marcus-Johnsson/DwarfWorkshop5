@@ -11,11 +11,11 @@
 
         public ICollection<MaterialRequirement> MaterialsRequired { get; set; } = new List<MaterialRequirement>();
 
-        public class MaterialRequirement
+       
+    } public class MaterialRequirement
         {
             public int Id { get; set; }
             public int MaterialId { get; set; }
             public int Quantity { get; set; }
         }
-    }
 }

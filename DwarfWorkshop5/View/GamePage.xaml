@@ -561,7 +561,7 @@
        x:Name="Recipie1"
        Text="Change Recipe"
        Command="{Binding ChangeRecipeCommand}"
-       CommandParameter="{Binding SelectedDwarf.SelectedRecipe1}"
+       CommandParameter="1"
        Background="Moccasin"
        BorderColor="Beige"
        Grid.Column="2"
@@ -593,7 +593,7 @@
                     x:Name="Recipie2"
                     Text="Change Recipe"
                     Command="{Binding ChangeRecipeCommand}"
-                    CommandParameter="{Binding SelectedDwarf.SelectedRecipe2}"
+                    CommandParameter="2"
                     Background="Moccasin"
                     BorderColor="Beige"
                     Grid.Column="2"
@@ -626,7 +626,7 @@
                 x:Name="Recipie3"
                 Text="Change Recipe"
                 Command="{Binding ChangeRecipeCommand}"
-                CommandParameter="{Binding SelectedDwarf.SelectedRecipe3}"
+                CommandParameter="3"
                 Background="Moccasin"
                 BorderColor="Beige"
                 Grid.Column="2"
@@ -638,30 +638,34 @@
             </StackLayout>
             
             <VerticalStackLayout
-                HeightRequest="200"
+                HeightRequest="300"
                 WidthRequest="200"
-                Padding="20"
+                Padding="5"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                                 Spacing="10"
+                                 Spacing="1"
                                  Background="White"
                                  Grid.Column="3"
-                                 Grid.Row="3">
+                                 Grid.Row="3"
+                IsVisible="{Binding SelectedDwarf}">
                 <Picker
          Title="Select a recipe"
                     
+                    
          ItemsSource="{Binding AvailableRecipe}"
          ItemDisplayBinding="{Binding Name}"
-         SelectedItem="{Binding PickerProduct}" />
+         SelectedItem="{Binding PickerProduct}" TextColor="Black"  Scale="1" FontSize="Medium"/>
 
-                <Label Text="{Binding PickerProduct.Materials[0].MaterialId}" />
-                <Label Text="{Binding PickerProduct.Materials[0].Quantity}" />
+                <Label Text="{Binding PickerProduct.Materials[0].MaterialName}" TextColor="Black"  HorizontalOptions="Start" />
+                <Label Text="{Binding PickerProduct.Materials[0].Quantity}" TextColor="Black"/>
 
-                <Label Text="{Binding PickerProduct.Materials[1]}" />
-                <Label Text="{Binding PickerProduct.Materials[1].Quantity}" />
+                <Label Text="{Binding PickerProduct.Materials[1].MaterialName}" TextColor="Black"/>
+                <Label Text="{Binding PickerProduct.Materials[1].Quantity}" TextColor="Black"/>
 
                 <Button
-         Text="Ok"
+                    Text="Put on crafting list"
+                    Command="{Binding ChangeRecipeCommand}"
+                    CommandParameter="{Binding PickerProduct}"
          >
 
                 </Button>
