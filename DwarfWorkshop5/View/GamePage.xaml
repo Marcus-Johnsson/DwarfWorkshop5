@@ -100,7 +100,7 @@
         </Border>
         <Grid
                 RowDefinitions="auto,auto,75,auto"
-                ColumnDefinitions="auto,auto,auto,auto"
+                ColumnDefinitions="700,550,300"
                 HorizontalOptions="Start"                
                 >
             <Border
@@ -273,19 +273,20 @@
 
             <Border
                 Background="SaddleBrown"
-                Stroke="Beige"
+                
                 WidthRequest="1600"
                 HorizontalOptions="Start"
                 Grid.Row="3"
-                Grid.ColumnSpan="0"
-                Padding="55">
+                Grid.ColumnSpan="3"
+                Padding="40">
 
 
                 <!-- Dwarf Info -->
                 <StackLayout  
                     Spacing="25"
-                            WidthRequest="750"
+                            WidthRequest="650"
                             HorizontalOptions="Start"
+                    
                     IsVisible="True"
                             >
                     <StackLayout.Triggers>
@@ -317,7 +318,7 @@
                         </Border>
                     </VerticalStackLayout>
                     <HorizontalStackLayout
-                        Spacing="25">
+                        Spacing="20">
                         <Border
                                 WidthRequest="150"
                                 HeightRequest="50"
@@ -389,7 +390,7 @@
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout
-                        Spacing="25">
+                        Spacing="20">
                         <Border
                                 WidthRequest="150"
                                 HeightRequest="50"
@@ -520,99 +521,16 @@
 
 
             </Border>
+          
+                
            
-            <ScrollView
-                     Grid.Row="3"
-                    HorizontalOptions="Start"
-                    Padding="55"
-                    IsVisible="False"
-                    >
-                <StackLayout>
-                    <VerticalStackLayout>
-                        <Border
-                                WidthRequest="500"
-                                HeightRequest="50"
-                                Stroke="Black"
-                                StrokeThickness="2"
-                               >
-                            <CollectionView
-                                    ItemsSource="{Binding ShopOre}" SelectionMode="None">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <VerticalStackLayout Spacing="25">
-                                            <Label Text="{Binding Name}" />
-                                            <Label Text="{Binding Inventory}" />
-                                            <Label Text="{Binding Price}" />
-
-                                         
-                          
-                                            
-                                            <Button
-                                Text="Buy"
-                                Command="{Binding BuyCommand}"
-                                CommandParameter="{Binding .}"
-                                BackgroundColor="Green" />
-                                        </VerticalStackLayout>
-                                     
-
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-
-                        </Border>
-
-                    </VerticalStackLayout>
-                </StackLayout>
-            </ScrollView>
-            <ScrollView
-         Grid.Row="3"
-        HorizontalOptions="Start"
-        Padding="55"
-        IsVisible="False"
-        >
-                <StackLayout>
-                    <VerticalStackLayout>
-                        <Border
-                    WidthRequest="500"
-                    HeightRequest="50"
-                    Stroke="Black"
-                    StrokeThickness="2"
-                   >
-                            <CollectionView
-                        ItemsSource="{Binding ShopGems}" SelectionMode="None">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <VerticalStackLayout Spacing="25">
-                                            <Label Text="{Binding Name}" />
-                                            <Label Text="{Binding Inventory}" />
-                                            <Label Text="{Binding Price}" />
-
-
-
-
-                                            <Button
-                    Text="Buy"
-                    Command="{Binding BuyCommand}"
-                    CommandParameter="{Binding .}"
-                    BackgroundColor="Green" />
-                                        </VerticalStackLayout>
-
-
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-
-                        </Border>
-
-                    </VerticalStackLayout>
-                </StackLayout>
-            </ScrollView>
             <StackLayout
                 Grid.Row="3"
-                WidthRequest="400"
-                HorizontalOptions="End"
-                VerticalOptions="Start"
-                Margin="60"
+                Grid.Column="1"
+                WidthRequest="450"
+                Background="SaddleBrown"
+                HorizontalOptions="Start"
+                Padding="40"
               
                 >
                 <StackLayout.Triggers>
@@ -624,7 +542,6 @@
                     WidthRequest="400"
                     HeightRequest="50"
                     Grid.Row="1"
-                    Grid.Column="0"
                     Background="White"
 
                     Stroke="Black"
@@ -719,6 +636,124 @@
 >
                 </Button>
             </StackLayout>
+            
+            <VerticalStackLayout
+                HeightRequest="200"
+                WidthRequest="200"
+                Padding="20"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                                 Spacing="10"
+                                 Background="White"
+                                 Grid.Column="3"
+                                 Grid.Row="3">
+                <Picker
+         Title="Select a recipe"
+                    
+         ItemsSource="{Binding AvailableRecipe}"
+         ItemDisplayBinding="{Binding Name}"
+         SelectedItem="{Binding PickerProduct}" />
+
+                <Label Text="{Binding PickerProduct.Materials[0].MaterialId}" />
+                <Label Text="{Binding PickerProduct.Materials[0].Quantity}" />
+
+                <Label Text="{Binding PickerProduct.Materials[1]}" />
+                <Label Text="{Binding PickerProduct.Materials[1].Quantity}" />
+
+                <Button
+         Text="Ok"
+         >
+
+                </Button>
+            </VerticalStackLayout>
+
+            <ScrollView
+                     Grid.Row="3"
+                    HorizontalOptions="Start"
+                    Padding="55"
+                    IsVisible="False"
+                    >
+                <StackLayout>
+                    <VerticalStackLayout>
+                        <Border
+                                WidthRequest="500"
+                                HeightRequest="50"
+                                Stroke="Black"
+                                StrokeThickness="2"
+                               >
+                            <CollectionView
+                                    ItemsSource="{Binding ShopOre}" SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <VerticalStackLayout Spacing="25">
+                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding Inventory}" />
+                                            <Label Text="{Binding Price}" />
+
+                                         
+                          
+                                            
+                                            <Button
+                                Text="Buy"
+                                Command="{Binding BuyCommand}"
+                                CommandParameter="{Binding .}"
+                                BackgroundColor="Green" />
+                                        </VerticalStackLayout>
+                                     
+
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </Border>
+
+                    </VerticalStackLayout>
+                </StackLayout>
+            </ScrollView>
+            <ScrollView
+         Grid.Row="3"
+        HorizontalOptions="Start"
+        Padding="55"
+        IsVisible="False"
+        >
+                <StackLayout>
+                    <VerticalStackLayout>
+                        <Border
+                    WidthRequest="500"
+                    HeightRequest="50"
+                    Stroke="Black"
+                    StrokeThickness="2"
+                   >
+                            <CollectionView
+                        ItemsSource="{Binding ShopGems}" SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <VerticalStackLayout Spacing="25">
+                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding Inventory}" />
+                                            <Label Text="{Binding Price}" />
+
+
+
+
+                                            <Button
+                    Text="Buy"
+                    Command="{Binding BuyCommand}"
+                    CommandParameter="{Binding .}"
+                    BackgroundColor="Green" />
+                                        </VerticalStackLayout>
+
+
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </Border>
+
+                    </VerticalStackLayout>
+                </StackLayout>
+            </ScrollView>
+            
 
         </Grid>
     </VerticalStackLayout>

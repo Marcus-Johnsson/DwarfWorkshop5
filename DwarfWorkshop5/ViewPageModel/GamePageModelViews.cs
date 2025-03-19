@@ -8,10 +8,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace DwarfWorkshop5.ViewPageModel
 {
-    public partial class GamePageModelViews : INotifyPropertyChanged
+    public partial class GamePageModelViews : INotifyPropertyChanged 
     {
         private User? _currentUser;
         private readonly UserSession _session;
@@ -113,9 +114,7 @@ namespace DwarfWorkshop5.ViewPageModel
                 {
                     _availableRecipe = availableRecipe; 
                     OnPropertyChanged(nameof(AvailableRecipe));
-                    var popup = new PopUpPage(); // Your PopupPage
-                    popup.BindingContext = this;
-                    await Application.Current.MainPage.ShowPopupAsync(popup);
+
                 }
             }
         }
