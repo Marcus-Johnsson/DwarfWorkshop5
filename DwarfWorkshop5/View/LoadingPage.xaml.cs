@@ -1,11 +1,6 @@
 using DwarfWorkhop5;
 using DwarfWorkshop5.Calculations;
 using DwarfWorkshop5.Models;
-using DwarfWorkshop5.ViewPageModel;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.Design;
-using Windows.Security.EnterpriseData;
 
 namespace DwarfWorkshop5.View;
 
@@ -15,7 +10,9 @@ public partial class LoadingPage : ContentPage
     private readonly User _user;
     private WorkProgress _workProgress;
     private readonly Helpers _helpers;
-    public LoadingPage(string page, MyDbContext mydb, User user, Helpers helpers, WorkProgress workProgress)
+    private readonly Shop _shop;
+
+    public LoadingPage(string page, MyDbContext mydb, User user, Helpers helpers, WorkProgress workProgress, Shop shop)
     {
 		InitializeComponent();
         _workProgress = new WorkProgress();
